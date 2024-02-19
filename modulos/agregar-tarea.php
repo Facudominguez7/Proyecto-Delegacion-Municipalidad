@@ -59,6 +59,9 @@ if (!empty($_GET['accion'])) {
     }
 }
 ?>
+<head>
+   <script defer src="js/contenedor-fotos.js"></script>
+</head>
 <section>
     <div class="flex items-center justify-center p-12">
         <div class="mx-auto w-full max-w-[550px]">
@@ -82,10 +85,12 @@ if (!empty($_GET['accion'])) {
                     <textarea name="descripcion" id="descripcion" class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" required> </textarea>
                 </div>
                 <div class="mb-5">
-                    <label class="mb-3 block text-base font-medium text-[#07074D]" for="imagen"> Agregar Fotos de la Tarea </label>
+                    <label class="mb-3 block text-base font-medium text-[#07074D]" for="imagen"> Agregar Fotos</label>
                     <div style="position: relative;">
                         <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-2 mt-2" id="lista" name="lista[]" type="file" multiple onchange="mostrarVistaPrevia()">
-                        <div id="vista_previa_container"></div>
+                        <div class="flex w-full overflow-x-scroll">
+                            <div id="vista_previa_container" class="flex flex-row flex-nowrap gap-2.5"></div>
+                        </div>
                     </div>
                 </div>
                 <div>
@@ -93,22 +98,6 @@ if (!empty($_GET['accion'])) {
                         Agregar
                     </button>
                 </div>
-                <script>
-                    function mostrarVistaPrevia() {
-                        var input = document.getElementById("lista");
-                        var vistaPreviaContainer = document.getElementById("vista_previa_container");
-                        //Borra el contenido del elemento 
-                        vistaPreviaContainer.innerHTML = "";
-
-                        if (input.files && input.files.length > 0) {
-                            for (var i = 0; i < input.files.length; i++) {
-                                var imagenPrevia = document.createElement("img");
-                                imagenPrevia.src = URL.createObjectURL(input.files[i]);
-                                vistaPreviaContainer.appendChild(imagenPrevia);
-                            }
-                        }
-                    }
-                </script>
             </form>
         </div>
     </div>

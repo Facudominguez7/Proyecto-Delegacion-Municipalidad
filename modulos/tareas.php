@@ -1,5 +1,5 @@
 <head>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
 </head>
 <header class="bg-gray-800 shadow">
     <div class="mx-auto max-w-7xl px-4 py-6 sm:px-3 lg:px-8">
@@ -90,13 +90,12 @@
     </div>
 
     <div class="w-full lg:w-4/6">
-        <section class="mx-auto w-full max-w-full flex justify-center items-stretch pb-4 px-4 sm:px-6 lg:px-8">
             <table class="border-collapse w-full mt-10">
                 <thead>
                     <tr>
-                        <th class="p-3 font-bold uppercase bg-gray-400 text-white border border-gray-300 hidden lg:table-cell">Título</th>
-                        <th class="p-3 font-bold uppercase bg-gray-400 text-white border border-gray-300 hidden lg:table-cell">Fecha</th>
-                        <th class="p-3 font-bold uppercase bg-gray-400 text-white border border-gray-300 hidden lg:table-cell">Acciones</th>
+                        <th class="p-3 font-bold uppercase bg-gray-400 text-white border border-gray-300 hidden xl:table-cell">Título</th>
+                        <th class="p-3 font-bold uppercase bg-gray-400 text-white border border-gray-300 hidden xl:table-cell">Fecha</th>
+                        <th class="p-3 font-bold uppercase bg-gray-400 text-white border border-gray-300 hidden xl:table-cell">Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -108,30 +107,29 @@
                     if ($datos->num_rows > 0) {
                         while ($fila = mysqli_fetch_array($datos)) {
                     ?>
-                            <tr class="bg-white lg:hover:bg-gray-100 flex lg:table-row flex-row lg:flex-row flex-wrap lg:flex-no-wrap mb-10 lg:mb-0">
-                                <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">
-                                    <span class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">Título</span>
+                                <td class="w-full xl:w-auto p-3 text-gray-800 text-center border border-b block xl:table-cell relative xl:static">
+                                    <span class="xl:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">Título</span>
                                     <?php echo $fila['titulo'] ?>
                                 </td>
-                                <td class="w-full lg:w-auto p-3 text-gray-800 border border-b text-center block lg:table-cell relative lg:static">
-                                    <span class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">Fecha</span>
+                                <td class="w-full xl:w-auto p-3 text-gray-800 border border-b text-center block xl:table-cell relative xl:static">
+                                    <span class="xl:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">Fecha</span>
                                     <?php echo $fila['fecha'] ?>
                                 </td>
-                                <td class="flex justify-center flex-col lg:flex-row w-full lg:w-auto p-3 text-gray-800 border border-b text-center lg:table-cell relative lg:static">
+                                <td class="flex justify-center flex-col xl:flex-row w-full xl:w-auto p-3 text-gray-800 border border-b text-center xl:table-cell relative xl:static">
                                     <!--<span class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">Acciones</span>-->
                                     <a href="" class="text-green-400 hover:text-green-600">
-                                        <button class="mb-2 lg:mb-0 middle none center mr-4 rounded-lg bg-green-800 py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-green-500/20 transition-all hover:shadow-lg hover:shadow-green-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" data-ripple-light="true">
+                                        <button class="mb-2 xl:mb-0 middle none center mr-4 rounded-lg bg-green-800 py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-green-500/20 transition-all hover:shadow-lg hover:shadow-green-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" data-ripple-light="true">
                                             Editar
                                         </button>
                                     </a>
                                     <a href="index.php?modulo=detalle&idTarea=<?php echo $fila['id'] ?>" class="text-yellow-400 hover:text-yellow-600">
-                                        <button class="mb-2 lg:mb-0 middle none center mr-4 rounded-lg bg-yellow-800 py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-yellow-500/20 transition-all hover:shadow-lg hover:shadow-yellow-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" data-ripple-light="true">
+                                        <button class="mb-2 xl:mb-0 middle none center mr-4 rounded-lg bg-yellow-800 py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-yellow-500/20 transition-all hover:shadow-lg hover:shadow-yellow-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" data-ripple-light="true">
                                             Detalles
                                         </button>
                                     </a>
                                     <?php $idChacra = $_GET['idChacra']?>
                                     <a href="index.php?modulo=eliminar&idChacra=<?php echo $idChacra;?>&id=<?php echo $fila['id']?>&tipo=tareas" class="text-red-400 hover:text-red-600">
-                                        <button class="mb-2 lg:mb-0 middle none center mr-4 rounded-lg bg-red-800 py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-red-500/20 transition-all hover:shadow-lg hover:shadow-red-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" data-ripple-light="true">
+                                        <button class="mb-2 xl:mb-0 middle none center mr-4 rounded-lg bg-red-800 py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-red-500/20 transition-all hover:shadow-lg hover:shadow-red-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" data-ripple-light="true">
                                             Eliminar
                                         </button>
                                     </a>

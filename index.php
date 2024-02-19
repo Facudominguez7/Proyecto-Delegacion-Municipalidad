@@ -38,10 +38,12 @@ conectar();
                         <div class="absolute inset-0 h-full w-full scale-0 rounded-2xl transition-all duration-300 group-hover:scale-100 group-hover:bg-white/30"></div>
                     </button>
                 </a>
-                <button class="group relative h-12 w-64 overflow-hidden rounded-2xl bg-green-500 text-lg font-bold text-white mb-5">
-                    Puntos Estratégicos
-                    <div class="absolute inset-0 h-full w-full scale-0 rounded-2xl transition-all duration-300 group-hover:scale-100 group-hover:bg-white/30"></div>
-                </button>
+                <a href="index.php?modulo=puntos">
+                    <button class="group relative h-12 w-64 overflow-hidden rounded-2xl bg-green-500 text-lg font-bold text-white mb-5">
+                        Control mini basurales
+                        <div class="absolute inset-0 h-full w-full scale-0 rounded-2xl transition-all duration-300 group-hover:scale-100 group-hover:bg-white/30"></div>
+                    </button>
+                </a>
                 <button class="group relative h-12 w-64 overflow-hidden rounded-2xl bg-green-500 text-lg font-bold text-white mb-5">
                     etc
                     <div class="absolute inset-0 h-full w-full scale-0 rounded-2xl transition-all duration-300 group-hover:scale-100 group-hover:bg-white/30"></div>
