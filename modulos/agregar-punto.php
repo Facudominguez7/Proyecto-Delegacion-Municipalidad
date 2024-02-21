@@ -105,27 +105,26 @@ if (!empty($_GET['accion'])) {
                         Ingrese la ubicación:
                     </label>
                     <div id="mi_mapa"></div>
-                    <label for="latitud" class="mb-3 block text-base font-medium text-[#07074D]">
-                        Latitud
-                    </label>
-                    <input type="text" name="latitud" id="latitud" placeholder="Ej. 40.7128" class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" required readonly />
-                    <label for="longitud" class="mt-2 mb-3 block text-base font-medium text-[#07074D]">
-                        Longitud
-                    </label>
-                    <input type="text" name="longitud" id="longitud" placeholder="Ej. -74.0060" class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" required readonly />
+                    <input type="text" name="latitud" id="latitud" placeholder="Ej. 40.7128" class="hidden w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" required readonly />
+                    <input type="text" name="longitud" id="longitud" placeholder="Ej. -74.0060" class="hidden w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" required readonly />
                 </div>
                 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
                 <script>
                     document.addEventListener('DOMContentLoaded', function() {
                         let latitudInput = document.getElementById('latitud');
                         let longitudInput = document.getElementById('longitud');
-
                         let map = L.map('mi_mapa').setView([-27.389449, -55.932426], 13); // Vista inicial centrada en el mapa del mundo
                         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
                             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                         }).addTo(map);
 
+                        let marker;
+
                         function onMapClick(e) {
+                            if (marker) {
+                                map.removeLayer(marker); // Elimina el marcador existente si hay alguno
+                            }
+                            marker = L.marker(e.latlng).addTo(map); // Agrega un nuevo marcador en la posición del clic
                             latitudInput.value = e.latlng.lat.toFixed(6);
                             longitudInput.value = e.latlng.lng.toFixed(6);
                         }
