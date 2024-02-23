@@ -1,6 +1,14 @@
 <?php
-include('includes/conexion.php');
+include_once('includes/conexion.php');
 conectar();
+
+// Verificar si se está solicitando la generación del PDF
+if (!empty($_GET['pdf']) && $_GET['pdf'] === 'ReporteActividadPorDia') {
+    // Incluir el archivo necesario para la generación del PDF
+    require('./fpdf/ReporteActividadPorDia.php');
+    exit; // Terminar la ejecución del script después de generar el PDF
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -30,6 +38,9 @@ conectar();
         if (!empty($_GET['modulo'])) {
             $modulo = $_GET['modulo'];
             include('./modulos/' . $modulo . '.php');
+        } elseif (!empty($_GET['pdf'])) {
+            $pdf = $_GET['pdf'];
+            include('./fpdf/' . $pdf . '.php');
         } else {
         ?>
             <div class="flex min-h-screen w-full items-center justify-center flex-col bg-gray-100">

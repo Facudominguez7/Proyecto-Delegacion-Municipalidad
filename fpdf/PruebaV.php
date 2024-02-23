@@ -1,6 +1,7 @@
 <?php
 
-require('./fpdf.php');
+require('./fpdf/fpdf.php');
+
 
 class PDF extends FPDF
 {
@@ -12,19 +13,19 @@ class PDF extends FPDF
 
       //$consulta_info = $conexion->query(" select *from hotel ");//traemos datos de la empresa desde BD
       //$dato_info = $consulta_info->fetch_object();
-      $this->Image('logo.png', 185, 5, 20); //logo de la empresa,moverDerecha,moverAbajo,tamañoIMG
+      $this->Image('fpdf/logo.png', 185, 5, 20); //logo de la empresa,moverDerecha,moverAbajo,tamañoIMG
       $this->SetFont('Arial', 'B', 19); //tipo fuente, negrita(B-I-U-BIU), tamañoTexto
       $this->Cell(45); // Movernos a la derecha
       $this->SetTextColor(0, 0, 0); //color
       //creamos una celda o fila
-      $this->Cell(110, 15, utf8_decode('NOMBRE EMPRESA'), 1, 1, 'C', 0); // AnchoCelda,AltoCelda,titulo,borde(1-0),saltoLinea(1-0),posicion(L-C-R),ColorFondo(1-0)
+      $this->Cell(110, 15, utf8_decode('Delegación Chacra 32-33'), 1, 1, 'C', 0); // AnchoCelda,AltoCelda,titulo,borde(1-0),saltoLinea(1-0),posicion(L-C-R),ColorFondo(1-0)
       $this->Ln(3); // Salto de línea
       $this->SetTextColor(103); //color
 
       /* UBICACION */
       $this->Cell(110);  // mover a la derecha
       $this->SetFont('Arial', 'B', 10);
-      $this->Cell(96, 10, utf8_decode("Ubicación : "), 0, 0, '', 0);
+      $this->Cell(96, 10, utf8_decode("Ubicación : Av. Gral. Lavalle 4637"), 0, 0, '', 0);
       $this->Ln(5);
 
       /* TELEFONO */
@@ -36,21 +37,17 @@ class PDF extends FPDF
       /* COREEO */
       $this->Cell(110);  // mover a la derecha
       $this->SetFont('Arial', 'B', 10);
-      $this->Cell(85, 10, utf8_decode("Correo : "), 0, 0, '', 0);
-      $this->Ln(5);
-
-      /* TELEFONO */
-      $this->Cell(110);  // mover a la derecha
-      $this->SetFont('Arial', 'B', 10);
-      $this->Cell(85, 10, utf8_decode("Sucursal : "), 0, 0, '', 0);
+      $this->Cell(85, 10, utf8_decode("Correo : delegación.municipal3233@gmail.com "), 0, 0, '', 0);
       $this->Ln(10);
+
+    
 
       /* TITULO DE LA TABLA */
       //color
       $this->SetTextColor(228, 100, 0);
       $this->Cell(50); // mover a la derecha
       $this->SetFont('Arial', 'B', 15);
-      $this->Cell(100, 10, utf8_decode("REPORTE DE HABITACIONES "), 0, 1, 'C', 0);
+      $this->Cell(100, 10, utf8_decode("REPORTE DE ACTIVIDAD "), 0, 1, 'C', 0);
       $this->Ln(7);
 
       /* CAMPOS DE LA TABLA */
@@ -60,7 +57,7 @@ class PDF extends FPDF
       $this->SetDrawColor(163, 163, 163); //colorBorde
       $this->SetFont('Arial', 'B', 11);
       $this->Cell(18, 10, utf8_decode('N°'), 1, 0, 'C', 1);
-      $this->Cell(20, 10, utf8_decode('NÚMERO'), 1, 0, 'C', 1);
+      $this->Cell(20, 10, utf8_decode('TÍTULO'), 1, 0, 'C', 1);
       $this->Cell(30, 10, utf8_decode('TIPO'), 1, 0, 'C', 1);
       $this->Cell(25, 10, utf8_decode('PRECIO'), 1, 0, 'C', 1);
       $this->Cell(70, 10, utf8_decode('CARACTERÍSTICAS'), 1, 0, 'C', 1);
