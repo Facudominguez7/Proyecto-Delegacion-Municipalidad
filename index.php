@@ -28,7 +28,8 @@ conectar();
     <main>
         <?php
         if (!empty($_GET['modulo'])) {
-            include('./modulos/' . $_GET['modulo'] . '.php');
+            $modulo = $_GET['modulo'];
+            include('./modulos/' . $modulo . '.php');
         } else {
         ?>
             <div class="flex min-h-screen w-full items-center justify-center flex-col bg-gray-100">

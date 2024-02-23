@@ -33,6 +33,23 @@ if (!empty($_GET['accion'])) {
     echo "<script>window.location='index.php?modulo=chacras';</script>";
 }
 ?>
+
+<head>
+    <script defer src="js/contenedor-fotos.js"></script>
+    <script defer src="js/mapa.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <style>
+        #mi_mapa {
+            width: 100%;
+            height: 400px;
+            /* Establece una altura inicial */
+            max-width: 100%;
+            /* Limita el ancho máximo del mapa */
+            max-height: 500px;
+            /* Limita la altura máxima del mapa */
+        }
+    </style>
+</head>
 <section>
     <div class="flex items-center justify-center p-12">
         <div class="mx-auto w-full max-w-[550px]">
@@ -41,26 +58,31 @@ if (!empty($_GET['accion'])) {
                     <label for="name" class="mb-3 block text-base font-medium text-[#07074D]">
                         Nombre
                     </label>
-                    <input type="text" name="nombre" id="nombre" placeholder="Nombre de la chacra" class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" required/>
+                    <input type="text" name="nombre" id="nombre" placeholder="Nombre de la chacra" class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" required />
                 </div>
                 <div class="mb-5">
                     <label for="presidente" class="mb-3 block text-base font-medium text-[#07074D]">
                         Presidente
                     </label>
-                    <input type="text" name="presidente" id="presidente" placeholder="Apellido y Nombre" class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" required/>
+                    <input type="text" name="presidente" id="presidente" placeholder="Apellido y Nombre" class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" required />
                 </div>
                 <div class="mb-5">
                     <label for="ubicacion" class="flex justify-center mb-3 text-base font-medium text-[#07074D]">
                         Ingrese la ubicación:
                     </label>
-                    <label for="latitud" class="mb-3 block text-base font-medium text-[#07074D]">
-                        Latitud
-                    </label>
-                    <input type="text" name="latitud" id="latitud" placeholder="Ej. 40.7128" class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" required />
-                    <label for="longitud" class="mt-2 mb-3 block text-base font-medium text-[#07074D]">
-                        Longitud
-                    </label>
-                    <input type="text" name="longitud" id="longitud" placeholder="Ej. -74.0060" class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" required/>
+                    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+                    <div id="mi_mapa"></div>
+                    <input type="text" name="latitud" id="latitud" placeholder="Ej. 40.7128" class="hidden w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" required readonly />
+                    <input type="text" name="longitud" id="longitud" placeholder="Ej. -74.0060" class="hidden w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" required readonly />
+                </div>
+                <div class="mb-5">
+                    <label class="mb-3 block text-base font-medium text-[#07074D]" for="imagen"> Agregar Fotos</label>
+                    <div style="position: relative;">
+                        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-2 mt-2" id="lista" name="lista[]" type="file" multiple onchange="mostrarVistaPrevia()">
+                        <div class="flex w-full overflow-x-scroll">
+                            <div id="vista_previa_container" class="flex flex-row flex-nowrap gap-2.5"></div>
+                        </div>
+                    </div>
                 </div>
                 <div>
                     <button type="submit" class="hover:shadow-form rounded-md bg-[#6A64F1] py-3 px-8 text-base font-semibold text-white outline-none">
