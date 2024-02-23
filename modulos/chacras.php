@@ -39,7 +39,12 @@
     </div>
 </form>
 
-<div class="flex justify-center mt-10 mb-0">
+<div class="flex justify-center flex-row mt-10 mb-0">
+    <a href="index.php?pdf=ReporteActividadPorDia" target="_blank">
+        <button class="middle none center mr-4 rounded-lg bg-gray-800 py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-gray-500/20 transition-all hover:shadow-lg hover:shadow-gray-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" data-ripple-light="true">
+            Generar Reporte PDF del día
+        </button>
+    </a>
     <a href="index.php?modulo=agregar-chacra">
         <button class="middle none center mr-4 rounded-lg bg-gray-800 py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-gray-500/20 transition-all hover:shadow-lg hover:shadow-gray-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" data-ripple-light="true">
             Agregar Chacra

@@ -75,15 +75,6 @@ if (!empty($_GET['accion'])) {
                     <input type="text" name="latitud" id="latitud" placeholder="Ej. 40.7128" class="hidden w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" required readonly />
                     <input type="text" name="longitud" id="longitud" placeholder="Ej. -74.0060" class="hidden w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" required readonly />
                 </div>
-                <div class="mb-5">
-                    <label class="mb-3 block text-base font-medium text-[#07074D]" for="imagen"> Agregar Fotos</label>
-                    <div style="position: relative;">
-                        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-2 mt-2" id="lista" name="lista[]" type="file" multiple onchange="mostrarVistaPrevia()">
-                        <div class="flex w-full overflow-x-scroll">
-                            <div id="vista_previa_container" class="flex flex-row flex-nowrap gap-2.5"></div>
-                        </div>
-                    </div>
-                </div>
                 <div>
                     <button type="submit" class="hover:shadow-form rounded-md bg-[#6A64F1] py-3 px-8 text-base font-semibold text-white outline-none">
                         Agregar

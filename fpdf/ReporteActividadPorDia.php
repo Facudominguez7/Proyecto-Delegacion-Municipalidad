@@ -84,7 +84,6 @@ $pdf->SetFont('Arial', '', 12);
 $pdf->SetDrawColor(163, 163, 163); //colorBorde
 
 $fecha_actual = date('Y-m-d');
-$idChacra = $_GET['idChacra'];
 $consulta_reporte_actividad = $con->query("SELECT tareas.id, tareas.titulo, tareas.descripcion, tareas.fecha, chacras.nombre AS nombreChacra
                                            FROM tareas 
                                            INNER JOIN chacras ON tareas.idChacra = chacras.id 
