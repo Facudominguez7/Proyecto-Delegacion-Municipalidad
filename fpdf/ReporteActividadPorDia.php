@@ -94,22 +94,22 @@ $consulta_reporte_actividad = $con->query("SELECT tareas.id, tareas.titulo, tare
 while ($datos_reporte = $consulta_reporte_actividad->fetch_object()) {
     // Crear las celdas de la tabla para cada registro
     $pdf->Cell(18, 10, utf8_decode('N°'), 1, 0, 'C', 0);
-    $pdf->Cell(20, 10, utf8_decode('CHACRA'), 1, 0, 'C', 0);
-    $pdf->Cell(55, 10, utf8_decode('TÍTULO'), 1, 0, 'C', 0);
+    $pdf->Cell(30, 10, utf8_decode('CHACRA'), 1, 0, 'C', 0);
+    $pdf->Cell(70, 10, utf8_decode('TÍTULO'), 1, 0, 'C', 0);
     $pdf->Cell(25, 10, utf8_decode('FECHA'), 1, 1, 'C', 0);
 
     // Contenido de cada celda
     $pdf->Cell(18, 10, utf8_decode($datos_reporte->id), 1, 0, 'C', 0);
-    $pdf->Cell(20, 10, utf8_decode($datos_reporte->nombreChacra), 1, 0, 'C', 0);
-    $pdf->Cell(55, 10, utf8_decode($datos_reporte->titulo), 1, 0, 'C', 0);
-    $pdf->Cell(25, 10, utf8_decode($datos_reporte->fecha), 1, 1, 'L', 0);
+    $pdf->Cell(30, 10, utf8_decode($datos_reporte->nombreChacra), 1, 0, 'C', 0);
+    $pdf->Cell(70, 10, utf8_decode($datos_reporte->titulo), 1, 0, 'C', 0);
+    $pdf->Cell(25, 10, date('d/m/Y', strtotime($datos_reporte->fecha)), 1, 1, 'L', 0);
 
     // Obtener la descripción
     $descripcion = utf8_decode($datos_reporte->descripcion);
     
     // Dibujar el campo de descripción debajo de la tabla
-    $pdf->Cell(18+20+55+25, 10, utf8_decode('Descripción:'), 'LTR', 1, 'C', 0); // Título del campo de descripción
-    $pdf->MultiCell(18+20+55+25, 10, utf8_decode($descripcion), 'LRB', 'C'); // Contenido del campo de descripción
+    $pdf->Cell(18+30+70+25, 10, utf8_decode('Descripción:'), 'LTR', 1, 'C', 0); // Título del campo de descripción
+    $pdf->MultiCell(18+30+70+25, 10, utf8_decode($descripcion), 'LRB', 'C'); // Contenido del campo de descripción
     
     // Agregar un salto de línea después de cada registro
     $pdf->Ln(5);
