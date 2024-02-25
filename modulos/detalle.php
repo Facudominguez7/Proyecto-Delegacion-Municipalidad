@@ -39,7 +39,7 @@ if (isset($_GET['accion']) && $_GET['accion'] == 'editar') {
         // Cerrar la declaración preparada
         mysqli_stmt_close($stmt);
         // Redirigir de vuelta a la página de detalle de la tarea
-        echo "<script>window.location='index.php?modulo=detalle&idTarea=" . $idTarea . "';</script>";
+        echo "<script>window.location='index.php?modulo=detalle&idTarea=" . $idTarea . "&idChacra=". $idChacra ."';</script>";
     } elseif ((isset($_POST['idTarea']) && isset($_POST['descripcion']))) {
         $descripcion = $_POST['descripcion'];
         $idTarea = $_POST['idTarea'];
@@ -58,7 +58,7 @@ if (isset($_GET['accion']) && $_GET['accion'] == 'editar') {
         // Cerrar la declaración preparada
         mysqli_stmt_close($stmt);
         // Redirigir de vuelta a la página de detalle de la tarea
-        echo "<script>window.location='index.php?modulo=detalle&idTarea=" . $idTarea . "';</script>";
+        echo "<script>window.location='index.php?modulo=detalle&idTarea=" . $idTarea . "&idChacra=". $idChacra ."';</script>";
     }
 }
 
@@ -82,7 +82,7 @@ if (isset($_GET['accion']) && $_GET['accion'] == 'editar') {
                 <div class="flex items-center justify-center px-4">
                     <div class="max-w-4xl bg-white w-full rounded-lg shadow-xl">
                         <div class="p-4 border-b">
-                            <form action="index.php?modulo=detalle&accion=editar&idTarea=<?php echo $_GET['idTarea'] ?>" method="post" class="w-full">
+                            <form action="index.php?modulo=detalle&accion=editar&idChacra=<?php echo $_GET['idChacra']?>" method="post" class="w-full">
                                 <div class="flex flex-row items-center">
                                     <h2 class="text-2xl w-full">
                                         <input type="hidden" name="idTarea" value="<?php echo $fila['id']; ?>">
@@ -99,7 +99,7 @@ if (isset($_GET['accion']) && $_GET['accion'] == 'editar') {
                                     </button>
                                 </div>
                             </form>
-                            <form class="mt-5 mb-5" action="index.php?modulo=detalle&accion=editar&idTarea=<?php echo $_GET['idTarea'] ?>" method="post">
+                            <form class="mt-5 mb-5" action="index.php?modulo=detalle&accion=editar&idChacra=<?php echo $_GET['idChacra']?>" method="post">
                                 <div class="flex flex-row items-center">
                                     <p class="text-xl text-gray-500">
                                         <input type="hidden" name="idTarea" value="<?php echo $fila['id']; ?>">
@@ -118,7 +118,7 @@ if (isset($_GET['accion']) && $_GET['accion'] == 'editar') {
                             </form>
                         </div>
                         <div class="p-4 border-b">
-                            <form action="index.php?modulo=detalle&accion=editar&idTarea=<?php echo $_GET['idTarea'] ?>" method="post">
+                            <form action="index.php?modulo=detalle&accion=editar&idChacra=<?php echo $_GET['idChacra']?>" method="post">
                                 <div class="flex flex-row items-center justify-between">
                                     <p class="text-gray-600 text-xl mb-4">
                                         Descripción

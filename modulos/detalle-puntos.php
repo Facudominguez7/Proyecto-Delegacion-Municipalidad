@@ -11,53 +11,53 @@ if (isset($_GET['accion']) && $_GET['accion'] == 'editar') {
 
         // Verificar si se produjeron errores
         if (mysqli_stmt_error($stmt)) {
-            echo "Error al actualizar la tarea: " . mysqli_stmt_error($stmt);
+            echo "Error al actualizar el punto: " . mysqli_stmt_error($stmt);
         } else {
             echo "<script>alert('Punto Actualizado con Éxito');</script>";
         }
         // Cerrar la declaración preparada
         mysqli_stmt_close($stmt);
 
-        // Redirigir de vuelta a la página de detalle de la tarea
-        echo "<script>window.location='index.php?modulo=detalle-puntos&idTarea=" . $idPunto . "';</script>";
-    } elseif (isset($_POST['idTarea']) && isset($_POST['fecha'])) {
+        // Redirigir de vuelta a la página de detalle de la Punto
+        echo "<script>window.location='index.php?modulo=detalle-puntos&idPunto=" . $idPunto . "';</script>";
+    } elseif (isset($_POST['idPunto']) && isset($_POST['fecha'])) {
         $fecha = $_POST['fecha'];
-        $idTarea = $_POST['idTarea'];
+        $idPunto = $_POST['idPunto'];
 
-        $sqlEditarTarea = "UPDATE tareas SET fecha=? WHERE id=?";
-        $stmt = mysqli_prepare($con, $sqlEditarTarea);
-        mysqli_stmt_bind_param($stmt, "si", $fecha, $idTarea);
+        $sqlEditarPunto = "UPDATE puntos SET fecha=? WHERE id=?";
+        $stmt = mysqli_prepare($con, $sqlEditarPunto);
+        mysqli_stmt_bind_param($stmt, "si", $fecha, $idPunto);
         mysqli_stmt_execute($stmt);
 
         // Verificar si se produjeron errores
         if (mysqli_stmt_error($stmt)) {
-            echo "Error al actualizar la tarea: " . mysqli_stmt_error($stmt);
+            echo "Error al actualizar el punto: " . mysqli_stmt_error($stmt);
         } else {
-            echo "<script>alert('Tarea Actualizada con Éxito');</script>";
+            echo "<script>alert('Punto Actualizado con Éxito');</script>";
         }
         // Cerrar la declaración preparada
         mysqli_stmt_close($stmt);
-        // Redirigir de vuelta a la página de detalle de la tarea
-        echo "<script>window.location='index.php?modulo=detalle&idTarea=" . $idTarea . "';</script>";
-    } elseif ((isset($_POST['idTarea']) && isset($_POST['descripcion']))) {
+        // Redirigir de vuelta a la página de detalle de la Punto
+        echo "<script>window.location='index.php?modulo=detalle-puntos&idPunto=" . $idPunto . "';</script>";
+    } elseif ((isset($_POST['idPunto']) && isset($_POST['descripcion']))) {
         $descripcion = $_POST['descripcion'];
-        $idTarea = $_POST['idTarea'];
+        $idPunto = $_POST['idPunto'];
 
-        $sqlEditarTarea = "UPDATE tareas SET descripcion=? WHERE id=?";
-        $stmt = mysqli_prepare($con, $sqlEditarTarea);
-        mysqli_stmt_bind_param($stmt, "si", $descripcion, $idTarea);
+        $sqlEditarPunto = "UPDATE Puntos SET descripcion=? WHERE id=?";
+        $stmt = mysqli_prepare($con, $sqlEditarPunto);
+        mysqli_stmt_bind_param($stmt, "si", $descripcion, $idPunto);
         mysqli_stmt_execute($stmt);
 
         // Verificar si se produjeron errores
         if (mysqli_stmt_error($stmt)) {
-            echo "Error al actualizar la tarea: " . mysqli_stmt_error($stmt);
+            echo "Error al actualizar el Punto: " . mysqli_stmt_error($stmt);
         } else {
-            echo "<script>alert('Tarea Actualizada con Éxito');</script>";
+            echo "<script>alert('Punto Actualizado con Éxito');</script>";
         }
         // Cerrar la declaración preparada
         mysqli_stmt_close($stmt);
-        // Redirigir de vuelta a la página de detalle de la tarea
-        echo "<script>window.location='index.php?modulo=detalle&idTarea=" . $idTarea . "';</script>";
+        // Redirigir de vuelta a la página de detalle de la Punto
+        echo "<script>window.location='index.php?modulo=detalle-puntos&idPunto=" . $idPunto . "';</script>";
     }
 }
 
@@ -81,10 +81,10 @@ if (isset($_GET['accion']) && $_GET['accion'] == 'editar') {
                 <div class="flex items-center justify-center px-4">
                     <div class="max-w-4xl bg-white w-full rounded-lg shadow-xl">
                         <div class="p-4 border-b">
-                            <form action="index.php?modulo=detalle-puntos&accion=editar&idPunto=<?php echo $_GET['idPunto'] ?>" method="post" class="w-full">
+                            <form action="index.php?modulo=detalle-puntos&accion=editar" method="post" class="w-full">
                                 <div class="flex flex-row items-center">
                                     <h2 class="text-2xl w-full">
-                                        <input type="hidden" name="idPuno" value="<?php echo $fila['id']; ?>">
+                                        <input type="hidden" name="idPunto" value="<?php echo $fila['id']; ?>">
                                         <input class="w-full placeholder-opacity-100 placeholder-transparent border-b border-gray-300 focus:border-blue-500" type="text" name="titulo" value="<?php echo $fila['titulo']; ?>" readonly>
                                     </h2>
                                     <button class="guardar-btn hidden ml-2 w-6 h-6" type="submit"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
@@ -144,11 +144,11 @@ if (isset($_GET['accion']) && $_GET['accion'] == 'editar') {
                     </h1>
                     <div class="flex flex-wrap justify-center">
                         <?php
-                        $carpetaTarea = "imagenes/puntos/" . $fila['id'] . "/";
-                        $imagenesTarea = glob($carpetaTarea . "*.{jpg,jpeg,png,gif,webp}", GLOB_BRACE);
+                        $carpetaPunto = "imagenes/puntos/" . $fila['id'] . "/";
+                        $imagenesPunto = glob($carpetaPunto . "*.{jpg,jpeg,png,gif,webp}", GLOB_BRACE);
 
                         $imagenes = array();
-                        foreach ($imagenesTarea as $imagen) {
+                        foreach ($imagenesPunto as $imagen) {
                             array_push($imagenes, $imagen);
                         }
                         // Verificar si $imagenes está definida y no es null
