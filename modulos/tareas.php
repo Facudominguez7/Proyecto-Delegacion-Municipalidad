@@ -107,7 +107,8 @@
                 <?php
                 $sqlMostrarTarea = "SELECT tareas.id, tareas.titulo, tareas.fecha   
                  FROM tareas
-                 WHERE tareas.idChacra = $idChacra";
+                 WHERE tareas.idChacra = $idChacra
+                 ORDER BY tareas.fecha DESC";
                 $datos = mysqli_query($con, $sqlMostrarTarea);
                 if ($datos->num_rows > 0) {
                     while ($fila = mysqli_fetch_array($datos)) {
@@ -118,16 +119,11 @@
                         </td>
                         <td class="w-full xl:w-auto p-3 text-gray-800 border border-b text-center block xl:table-cell relative xl:static">
                             <span class="xl:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">Fecha</span>
-                            <?php echo $fila['fecha'] ?>
+                            <?php echo date('d/m/Y', strtotime($fila['fecha'])); ?>
                         </td>
                         <td class="flex justify-center flex-col xl:flex-row w-full xl:w-auto p-3 text-gray-800 border border-b text-center xl:table-cell relative xl:static">
-                            <!--<span class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">Acciones</span>-->
-                            <a href="" class="text-green-400 hover:text-green-600">
-                                <button class="mb-2 xl:mb-0 middle none center mr-4 rounded-lg bg-green-800 py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-green-500/20 transition-all hover:shadow-lg hover:shadow-green-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" data-ripple-light="true">
-                                    Editar
-                                </button>
-                            </a>
-                            <a href="index.php?modulo=detalle&idTarea=<?php echo $fila['id'] ?>" class="text-yellow-400 hover:text-yellow-600">
+                            <?php $idChacra = $_GET['idChacra'] ?>
+                            <a href="index.php?modulo=detalle&idTarea=<?php echo $fila['id'] ?>&idChacra=<?php echo $idChacra ?>" class="text-yellow-400 hover:text-yellow-600">
                                 <button class="mb-2 xl:mb-0 middle none center mr-4 rounded-lg bg-yellow-800 py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-yellow-500/20 transition-all hover:shadow-lg hover:shadow-yellow-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" data-ripple-light="true">
                                     Detalles
                                 </button>

@@ -1,9 +1,10 @@
 <?php
+$idChacra = $_GET['idChacra'];
 if (isset($_GET['accion']) && $_GET['accion'] == 'editar') {
     if (isset($_POST['idTarea']) && isset($_POST['titulo'])) {
         $idTarea = $_POST['idTarea'];
         $titulo = $_POST['titulo'];
-        
+
         $sqlEditarTarea = "UPDATE tareas SET titulo=? WHERE id=?";
         $stmt = mysqli_prepare($con, $sqlEditarTarea);
         mysqli_stmt_bind_param($stmt, "si", $titulo, $idTarea);
@@ -19,8 +20,8 @@ if (isset($_GET['accion']) && $_GET['accion'] == 'editar') {
         mysqli_stmt_close($stmt);
 
         // Redirigir de vuelta a la página de detalle de la tarea
-        echo "<script>window.location='index.php?modulo=detalle&idTarea=". $idTarea ."';</script>";
-    } elseif (isset($_POST['idTarea']) && isset($_POST['fecha'])){
+        echo "<script>window.location='index.php?modulo=detalle&idTarea=" . $idTarea . "&idChacra=". $idChacra ."';</script>";
+    } elseif (isset($_POST['idTarea']) && isset($_POST['fecha'])) {
         $fecha = $_POST['fecha'];
         $idTarea = $_POST['idTarea'];
 
@@ -37,9 +38,9 @@ if (isset($_GET['accion']) && $_GET['accion'] == 'editar') {
         }
         // Cerrar la declaración preparada
         mysqli_stmt_close($stmt);
-         // Redirigir de vuelta a la página de detalle de la tarea
-         echo "<script>window.location='index.php?modulo=detalle&idTarea=". $idTarea ."';</script>";
-    } elseif ((isset($_POST['idTarea']) && isset($_POST['descripcion']))){
+        // Redirigir de vuelta a la página de detalle de la tarea
+        echo "<script>window.location='index.php?modulo=detalle&idTarea=" . $idTarea . "';</script>";
+    } elseif ((isset($_POST['idTarea']) && isset($_POST['descripcion']))) {
         $descripcion = $_POST['descripcion'];
         $idTarea = $_POST['idTarea'];
 
@@ -56,12 +57,19 @@ if (isset($_GET['accion']) && $_GET['accion'] == 'editar') {
         }
         // Cerrar la declaración preparada
         mysqli_stmt_close($stmt);
-         // Redirigir de vuelta a la página de detalle de la tarea
-         echo "<script>window.location='index.php?modulo=detalle&idTarea=". $idTarea ."';</script>";
+        // Redirigir de vuelta a la página de detalle de la tarea
+        echo "<script>window.location='index.php?modulo=detalle&idTarea=" . $idTarea . "';</script>";
     }
 }
 
 ?>
+<div class="mt-5 ml-60 flex justify-start">
+    <a href="index.php?modulo=tareas&idChacra=<?php echo $_GET['idChacra'] ?>">
+        <button class="middle none center mr-4 rounded-lg bg-gray-800 py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-gray-500/20 transition-all hover:shadow-lg hover:shadow-gray-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" data-ripple-light="true">
+            Volver
+        </button>
+    </a>
+</div>
 <section class="mt-10">
     <?php
     $idTarea = $_GET['idTarea'];
@@ -78,7 +86,7 @@ if (isset($_GET['accion']) && $_GET['accion'] == 'editar') {
                                 <div class="flex flex-row items-center">
                                     <h2 class="text-2xl w-full">
                                         <input type="hidden" name="idTarea" value="<?php echo $fila['id']; ?>">
-                                        <input class="w-full" type="text" name="titulo" value="<?php echo $fila['titulo']; ?>" readonly>
+                                        <input class="w-full placeholder-opacity-100 placeholder-transparent border-b border-gray-300 focus:border-blue-500" type="text" name="titulo" value="<?php echo $fila['titulo']; ?>" readonly>
                                     </h2>
                                     <button class="guardar-btn hidden ml-2 w-6 h-6" type="submit"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
                                             <path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z" />
@@ -91,7 +99,7 @@ if (isset($_GET['accion']) && $_GET['accion'] == 'editar') {
                                     </button>
                                 </div>
                             </form>
-                            <form class="mt-5 mb-5"action="index.php?modulo=detalle&accion=editar&idTarea=<?php echo $_GET['idTarea'] ?>" method="post">
+                            <form class="mt-5 mb-5" action="index.php?modulo=detalle&accion=editar&idTarea=<?php echo $_GET['idTarea'] ?>" method="post">
                                 <div class="flex flex-row items-center">
                                     <p class="text-xl text-gray-500">
                                         <input type="hidden" name="idTarea" value="<?php echo $fila['id']; ?>">
@@ -181,6 +189,7 @@ if (isset($_GET['accion']) && $_GET['accion'] == 'editar') {
             });
         });
     });
+
     function enableEdit(button) {
         // Obtener el formulario padre del botón
         const form = button.closest('form');
