@@ -13,7 +13,7 @@ class PDF extends FPDF
 
         //$consulta_info = $conexion->query(" select *from hotel ");//traemos datos de la empresa desde BD
         //$dato_info = $consulta_info->fetch_object();
-        $this->Image('fpdf/logo.png', 185, 5, 20); //logo de la empresa,moverDerecha,moverAbajo,tamañoIMG
+        $this->Image('fpdf/logo-delegacion.jpg', 185, 5, 20); //logo de la empresa,moverDerecha,moverAbajo,tamañoIMG
         $this->SetFont('Arial', 'B', 19); //tipo fuente, negrita(B-I-U-BIU), tamañoTexto
         $this->Cell(45); // Movernos a la derecha
         $this->SetTextColor(0, 0, 0); //color
@@ -21,6 +21,12 @@ class PDF extends FPDF
         $this->Cell(110, 15, utf8_decode('Delegación Chacra 32-33'), 1, 1, 'C', 0); // AnchoCelda,AltoCelda,titulo,borde(1-0),saltoLinea(1-0),posicion(L-C-R),ColorFondo(1-0)
         $this->Ln(3); // Salto de línea
         $this->SetTextColor(103); //color
+
+         /* Delegado */
+         $this->Cell(110);  // mover a la derecha
+         $this->SetFont('Arial', 'B', 10);
+         $this->Cell(96, 10, utf8_decode("Delegado : Rolando Olmedo"), 0, 0, '', 0);
+         $this->Ln(5);
 
         /* UBICACION */
         $this->Cell(110);  // mover a la derecha
@@ -31,13 +37,13 @@ class PDF extends FPDF
         /* TELEFONO */
         $this->Cell(110);  // mover a la derecha
         $this->SetFont('Arial', 'B', 10);
-        $this->Cell(59, 10, utf8_decode("Teléfono : "), 0, 0, '', 0);
+        $this->Cell(59, 10, utf8_decode("Teléfono : 3764634383"), 0, 0, '', 0);
         $this->Ln(5);
 
         /* COREEO */
         $this->Cell(110);  // mover a la derecha
         $this->SetFont('Arial', 'B', 10);
-        $this->Cell(85, 10, utf8_decode("Correo : delegación.municipal3233@gmail.com "), 0, 0, '', 0);
+        $this->Cell(85, 10, utf8_decode("Correo : Pepeolmedo291@gmail.com "), 0, 0, '', 0);
         $this->Ln(10);
 
 
@@ -116,4 +122,4 @@ while ($datos_reporte = $consulta_reporte_actividad->fetch_object()) {
 }
 
 
-$pdf->Output('Prueba.pdf', 'I');//nombreDescarga, Visor(I->visualizar - D->descargar)
+$pdf->Output('Reporte.pdf', 'D');//nombreDescarga, Visor(I->visualizar - D->descargar)

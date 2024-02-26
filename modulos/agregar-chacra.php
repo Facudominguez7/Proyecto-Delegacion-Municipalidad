@@ -3,6 +3,7 @@ if (!empty($_GET['accion'])) {
     if ($_GET['accion'] == 'agregar') {
         $nombre = $_POST['nombre'];
         $presidente = $_POST['presidente'];
+        $telefono = $_POST['telefono'];
         $latitud = $_POST['latitud'];
         $longitud = $_POST['longitud'];
 
@@ -17,9 +18,9 @@ if (!empty($_GET['accion'])) {
             echo "<script> alert('ESTA CHACRA YA EXISTE EN LA BASE DE DATOS');</script>";
         } else {
             // Insertar chacra
-            $sql_insertar = "INSERT INTO chacras (nombre, presidente, ubicacion) VALUES (?, ?, ST_GeomFromText(?))";
+            $sql_insertar = "INSERT INTO chacras (nombre, presidente, numPresidente, ubicacion) VALUES (?, ?, ?, ST_GeomFromText(?))";
             $stmt_insertar = mysqli_prepare($con, $sql_insertar);
-            mysqli_stmt_bind_param($stmt_insertar, "sss", $nombre, $presidente, $punto);
+            mysqli_stmt_bind_param($stmt_insertar, "ssis", $nombre, $presidente, $telefono, $punto);
             $punto = "POINT($latitud $longitud)";
             mysqli_stmt_execute($stmt_insertar);
 
@@ -65,6 +66,12 @@ if (!empty($_GET['accion'])) {
                         Presidente
                     </label>
                     <input type="text" name="presidente" id="presidente" placeholder="Apellido y Nombre" class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" required />
+                </div>
+                <div class="mb-5">
+                    <label for="presidente" class="mb-3 block text-base font-medium text-[#07074D]">
+                        Número de teléfono del Presidente
+                    </label>
+                    <input type="number" name="telefono" id="telefono" placeholder="telefono" class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" required />
                 </div>
                 <div class="mb-5">
                     <label for="ubicacion" class="flex justify-center mb-3 text-base font-medium text-[#07074D]">

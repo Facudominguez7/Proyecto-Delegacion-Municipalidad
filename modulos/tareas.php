@@ -5,7 +5,7 @@
     <div class="mx-auto max-w-7xl px-4 py-6 sm:px-3 lg:px-8">
         <?php
         $idChacra = $_GET['idChacra'];
-        $sqlMostrarChacra = "SELECT chacras.id, chacras.nombre, chacras.presidente, ST_X(ubicacion) AS latitud, ST_Y(ubicacion) AS longitud   
+        $sqlMostrarChacra = "SELECT chacras.id, chacras.nombre, chacras.numPresidente, chacras.presidente, ST_X(ubicacion) AS latitud, ST_Y(ubicacion) AS longitud   
                  FROM chacras
                  WHERE chacras.id = $idChacra";
         $datos = mysqli_query($con, $sqlMostrarChacra);
@@ -18,6 +18,10 @@
                 <br>
                 <p class="text-3xl tracking-tight flex justify-center text-white">
                     Comisión: Pres. <?php echo $fila['presidente'] ?>
+                </p>
+                <br>
+                <p class="text-3xl tracking-tight flex justify-center text-white">
+                    Número de Teléfono: <?php echo $fila['numPresidente'] ?>
                 </p>
                 <br>
             <?php
@@ -49,7 +53,7 @@
 <div class="flex flex-col lg:flex-row lg:justify-evenly mt-5">
     <div class="w-full lg:w-1/2">
         <?php
-        $sqlMostrarChacra = "SELECT chacras.presidente, ST_X(ubicacion) AS latitud, ST_Y(ubicacion) AS longitud   
+        $sqlMostrarChacra = "SELECT chacras.nombre, ST_X(ubicacion) AS latitud, ST_Y(ubicacion) AS longitud   
                 FROM chacras
                 WHERE chacras.id = $idChacra";
         $datos = mysqli_query($con, $sqlMostrarChacra);
@@ -58,11 +62,11 @@
         ?>
                 <input id="latidudInput" class="hidden" type="text" value="<?php echo $fila['latitud'] ?>" readonly>
                 <input id="longitudInput" class="hidden" type="text" value="<?php echo $fila['longitud'] ?>" readonly>
-                <input id="presidenteInput" class="hidden" type="text" value="<?php echo $fila['presidente'] ?>" readonly>
+                <input id="nombreInput" class="hidden" type="text" value="<?php echo $fila['nombre'] ?>" readonly>
 
                 <div class="flex justify-center items-center flex-col">
                     <div id="mi_mapa" class="hidden  md:block md:w-96 md:h-96"></div>
-                    <a id="googleMapsLink" href="#" target="_blank" rel="noopener noreferrer">
+                    <a id="googleMapsLink" href="" target="_blank" rel="noopener noreferrer">
                         <button class="mt-2 middle none center mr-4 rounded-lg bg-blue-500 py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-blue-500/20 transition-all hover:shadow-lg hover:shadow-blue-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" data-ripple-light="true">
                             Abrir Ubicacion
                         </button>
@@ -74,15 +78,15 @@
                     document.addEventListener('DOMContentLoaded', function() {
                         let latitud = document.getElementById('latidudInput').value;
                         let longitud = document.getElementById('longitudInput').value;
-                        let nombreUbicacion = document.getElementById('presidenteInput').value
+                        let nombreUbicacion = document.getElementById('nombreInput').value
 
-                        let map = L.map('mi_mapa').setView([latitud, longitud], 17);
+                        let map = L.map('mi_mapa').setView([latitud, longitud], 16.4);
 
                         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
                             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                         }).addTo(map);
 
-                        L.marker([latitud, longitud]).addTo(map).bindPopup("Casa del Presidente " + nombreUbicacion).openPopup();
+                        L.marker([latitud, longitud]).addTo(map).bindPopup(nombreUbicacion).openPopup();
 
                         let googleMapsLink = document.getElementById('googleMapsLink');
                         googleMapsLink.href = `https://www.google.com/maps/dir/?api=1&destination=${latitud},${longitud}`;

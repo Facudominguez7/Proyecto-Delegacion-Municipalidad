@@ -4,13 +4,13 @@ if(isset($_GET['accion'])){
         $idChacra = $_POST['id'];
         $nombre = $_POST['nombre'];
         $presidente = $_POST['presidente'];
-        $dniPresidente = $_POST['dni'];
+        $telefono = $_POST['numPresidente'];
         $latitud = $_POST['latitud'];
         $longitud = $_POST['longitud'];
     
-        $sqlEditarChacra = "UPDATE chacras SET nombre=?, presidente=?, dniPresidente=?, ubicacion=POINT(?, ?) WHERE id=?";
+        $sqlEditarChacra = "UPDATE chacras SET nombre=?, presidente=?, numPresidente=?, ubicacion=POINT(?, ?) WHERE id=?";
         $stmt = mysqli_prepare($con, $sqlEditarChacra);
-        mysqli_stmt_bind_param($stmt, "sssddi", $nombre, $presidente, $dniPresidente, $latitud, $longitud, $idChacra);
+        mysqli_stmt_bind_param($stmt, "ssiddi", $nombre, $presidente, $numPresidente, $latitud, $longitud, $idChacra);
         mysqli_stmt_execute($stmt);
     
         // Verificar si se produjeron errores
@@ -31,7 +31,7 @@ if(isset($_GET['accion'])){
         <div class="mx-auto w-full max-w-[550px]">
             <?php
             $idChacra = $_GET['idChacra'];
-            $sql = "SELECT id, nombre, presidente, dniPresidente, ST_X(ubicacion) as latitud, ST_Y(ubicacion) as longitud From chacras WHERE chacras.id = $idChacra";
+            $sql = "SELECT id, nombre, presidente, numPresidente, ST_X(ubicacion) as latitud, ST_Y(ubicacion) as longitud From chacras WHERE chacras.id = $idChacra";
             $sql = mysqli_query($con, $sql);
             if (mysqli_num_rows($sql) != 0) {
                 $r = mysqli_fetch_array($sql);
@@ -52,9 +52,9 @@ if(isset($_GET['accion'])){
                 </div>
                 <div class="mb-5">
                     <label for="dni" class="mb-3 block text-base font-medium text-[#07074D]">
-                        DNI del Presidente
+                        Numero del Presidente
                     </label>
-                    <input type="number" name="dni" id="dni" value="<?php echo $r['dniPresidente'] ?>" placeholder="Apellido y Nombre" class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
+                    <input type="number" name="telefono" id="telefono" value="<?php echo $r['numPresidente'] ?>" placeholder="Apellido y Nombre" class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
                 </div>
                 <div class="mb-5">
                     <label for="ubicacion" class="flex justify-center mb-3 text-base font-medium text-[#07074D]">

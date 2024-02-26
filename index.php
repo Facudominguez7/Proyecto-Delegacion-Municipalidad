@@ -7,6 +7,9 @@ if (!empty($_GET['pdf']) && $_GET['pdf'] === 'ReporteActividadPorDia') {
     // Incluir el archivo necesario para la generación del PDF
     require('./fpdf/ReporteActividadPorDia.php');
     exit; // Terminar la ejecución del script después de generar el PDF
+} else if (!empty($_GET['pdf']) && $_GET['pdf'] === 'ReporteActividadUnica') {
+    require('./fpdf/ReporteActividadUnica.php');
+    exit;
 }
 
 ?>
