@@ -21,7 +21,7 @@ if (!empty($_GET['pdf']) && $_GET['pdf'] === 'ReporteActividadPorDia') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="estilos/output.css">
     <link rel="shortcut icon" type="image/jpg" href="Imagenes/logo-delegacion.jpg">
-    <title>Control-chacras</title>
+    <title>Plataforma Digital</title>
 </head>
 
 <body class="bg-gray-200">
