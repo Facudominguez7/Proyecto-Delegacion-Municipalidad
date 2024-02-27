@@ -37,7 +37,7 @@ if (!empty($_GET['accion'])) {
 
 <head>
     <script defer src="js/contenedor-fotos.js"></script>
-    <script defer src="js/mapa.js"></script>
+    <script src="js/mapa.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
     <style>
         #mi_mapa {
@@ -75,9 +75,16 @@ if (!empty($_GET['accion'])) {
                 </div>
                 <div class="mb-5">
                     <label for="ubicacion" class="flex justify-center mb-3 text-base font-medium text-[#07074D]">
-                        Ingrese la ubicación:
+                        Ubicación
                     </label>
-                    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+                    <div class="mb-5">
+                        <label for="ubicacion" class="flex justify-center mb-3 text-base font-medium text-[#07074D]">
+                            Ingrese la ubicación de Google Maps:
+                        </label>
+                        <input type="text" id="ubicacionInput" placeholder="Pegue aquí el enlace de Google Maps" class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" required />
+                        <button type="button" id="boton-ubicacion" class="bg-[#6A64F1] py-3 px-4 mt-2 text-base font-medium text-white rounded-md outline-none">Procesar</button>
+                    </div>
+                    <script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
                     <div id="mi_mapa"></div>
                     <input type="text" name="latitud" id="latitud" placeholder="Ej. 40.7128" class="hidden w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" required readonly />
                     <input type="text" name="longitud" id="longitud" placeholder="Ej. -74.0060" class="hidden w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" required readonly />

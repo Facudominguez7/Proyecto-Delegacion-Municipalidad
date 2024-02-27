@@ -49,7 +49,10 @@ if (!empty($_GET['pdf']) && $_GET['pdf'] === 'ReporteActividadPorDia') {
             include('./fpdf/' . $pdf . '.php');
         } else {
         ?>
-            <div class="flex min-h-screen w-full items-center justify-center flex-col bg-gray-100">
+            <div class="flex w-full items-center justify-center flex-col mt-10">
+                <div class="flex justify-center items-center mb-5">
+                    <img class="w-1/2 h-1/2 rounded-xl" src="Imagenes/logo-delegacion.jpg" alt="logo delegacion chacra 3233">
+                </div>
                 <a href="index.php?modulo=chacras">
                     <button class="group relative h-12 w-96 overflow-hidden rounded-2xl bg-green-500 text-lg font-bold text-white mb-5">
                         Chacras
