@@ -85,9 +85,9 @@ if (!empty($_GET['accion'])) {
             <form action="index.php?modulo=agregar-punto&accion=agregar" method="POST" enctype="multipart/form-data">
                 <div class="mb-5">
                     <label for="titulo" class="mb-3 block text-base font-medium text-[#07074D]">
-                        Título
+                        Dirección
                     </label>
-                    <input type="text" name="titulo" id="titulo" placeholder="Nombre del punto" class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" required />
+                    <input type="text" name="titulo" id="titulo" placeholder="Dirección del Punto" class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" required />
                 </div>
                 <div class="mb-5">
                     <label for="chacra" class="mb-3 block text-base font-medium text-[#07074D]">

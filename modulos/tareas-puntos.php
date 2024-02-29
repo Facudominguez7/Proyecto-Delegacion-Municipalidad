@@ -82,7 +82,7 @@
             <tbody>
                 <?php
                 $idPunto = $_GET['idPunto'];
-                $sqlMostrarTarea = "SELECT t.id, t.nombre, t.fecha   
+                $sqlMostrarTarea = "SELECT t.id, t.titulo, t.fecha   
                  FROM tareas_puntos AS t
                  WHERE t.idPunto = $idPunto
                  ORDER BY t.fecha DESC";
@@ -92,7 +92,7 @@
                 ?>
                         <td class="w-full xl:w-auto p-3 text-gray-800 text-center border border-b block xl:table-cell relative xl:static">
                             <span class="xl:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">Título</span>
-                            <?php echo $fila['nombre'] ?>
+                            <?php echo $fila['titulo'] ?>
                         </td>
                         <td class="w-full xl:w-auto p-3 text-gray-800 border border-b text-center block xl:table-cell relative xl:static">
                             <span class="xl:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">Fecha</span>
@@ -105,8 +105,8 @@
                                     Detalles
                                 </button>
                             </a>
-                            <?php $idChacra = $_GET['idChacra'] ?>
-                            <a href="index.php?modulo=eliminar&idChacra=<?php echo $idChacra; ?>&id=<?php echo $fila['id'] ?>&tipo=tareas" class="text-red-400 hover:text-red-600">
+                            <?php $idPunto = $_GET['idPunto'] ?>
+                            <a href="index.php?modulo=eliminar&idPunto=<?php echo $idPunto; ?>&id=<?php echo $fila['id'] ?>&tipo=tareas" class="text-red-400 hover:text-red-600">
                                 <button class="mb-2 xl:mb-0 middle none center mr-4 rounded-lg bg-red-800 py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-red-500/20 transition-all hover:shadow-lg hover:shadow-red-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" data-ripple-light="true">
                                     Eliminar
                                 </button>

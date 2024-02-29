@@ -64,6 +64,22 @@ if (isset($_GET['accion'])) {
             }
             echo "<script>window.location='index.php?modulo=chacras';</script>";
             break;
+        case 'eliminar-puntos':
+            // Eliminar el punto
+            $sqlEliminarPunto = "DELETE FROM puntos WHERE id = ?";
+            $stmtEliminarPunto = mysqli_prepare($con, $sqlEliminarPunto);
+            mysqli_stmt_bind_param($stmtEliminarPunto, "i", $id);
+            mysqli_stmt_execute($stmtEliminarPunto);
+
+            if (!mysqli_error($con)) {
+                echo "<script>alert('Punto eliminado con éxito');</script>";
+            } else {
+                echo "<script>alert('ERROR, no se pudo eliminar el punto: " . mysqli_error($con) . "');</script>";
+            }
+
+            mysqli_stmt_close($stmtEliminarPunto);
+            echo "<script>window.location='index.php?modulo=puntos';</script>";
+            break;
     }
 }
 ?>
@@ -81,7 +97,7 @@ if (isset($_GET['accion'])) {
                 </div>
                 <div class="row">
                     <div class="col-sm-6">
-                        <?php if ($tipo === 'tareas' || $tipo === 'chacras') {
+                        <?php if ($tipo === 'tareas' || $tipo === 'chacras' || $tipo === 'puntos') {
                             if (isset($_GET['idChacra'])) {
                                 $idChacra = $_GET['idChacra'];
                         ?>

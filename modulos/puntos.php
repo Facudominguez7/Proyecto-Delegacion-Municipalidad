@@ -55,8 +55,8 @@
     <table class="border-collapse w-full mt-10">
         <thead>
             <tr>
-                <th class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell">Título</th>
-                <th class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell">Chacra</th>
+                <th class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell">CHACRA</th>
+                <th class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell">Dirección</th>
                 <th class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell">Acciones</th>
             </tr>
         </thead>
@@ -71,12 +71,12 @@
             ?>
                         <tr class="bg-white lg:hover:bg-gray-100 flex lg:table-row flex-row lg:flex-row flex-wrap lg:flex-no-wrap mb-10 lg:mb-0">
                             <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">
-                                <span class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">Título</span>
-                                <?php echo $filabus['titulo'] ?>
+                                <span class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">CHACRA</span>
+                                <?php echo $filabus['nombreChacra'] ?>
                             </td>
                             <td class="w-full lg:w-auto p-3 text-gray-800 border border-b text-center block lg:table-cell relative lg:static">
-                                <span class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">Presidente</span>
-                                <?php echo $filabus['nombreChacra'] ?>
+                                <span class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">Dirección</span>
+                                <?php echo $filabus['titulo'] ?>
                             </td>
                             <td class="flex justify-center flex-col lg:flex-row w-full lg:w-auto p-3 text-gray-800 border border-b text-center lg:table-cell relative lg:static">
                                 <!--<span class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">Acciones</span>-->
@@ -90,7 +90,7 @@
                                         Editar
                                     </button>
                                 </a>
-                                <a href="index.php?modulo=eliminar&id=<?php echo $filabus['id'] ?>&tipo=chacras" class="text-red-400 hover:text-red-600 mt-2 lg:mt-0">
+                                <a href="index.php?modulo=eliminar&id=<?php echo $filabus['id'] ?>&tipo=puntos" class="text-red-400 hover:text-red-600 mt-2 lg:mt-0">
                                     <button class="middle none center mr-4 rounded-lg bg-red-800 py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-red-500/20 transition-all hover:shadow-lg hover:shadow-red-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" data-ripple-light="true">
                                         Eliminar
                                     </button>
@@ -111,12 +111,12 @@
                     ?>
                         <tr class="bg-white lg:hover:bg-gray-100 flex lg:table-row flex-row lg:flex-row flex-wrap lg:flex-no-wrap mb-10 lg:mb-0">
                             <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">
-                                <span class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">Título</span>
-                                <?php echo $fila['titulo'] ?>
+                                <span class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">CHACRA</span>
+                                <?php echo $fila['nombreChacra'] ?>
                             </td>
                             <td class="w-full lg:w-auto p-3 text-gray-800 border border-b text-center block lg:table-cell relative lg:static">
-                                <span class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">Presidente</span>
-                                <?php echo $fila['nombreChacra'] ?>
+                                <span class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">Dirección</span>
+                                <?php echo $fila['titulo'] ?>
                             </td>
                             <td class="flex justify-center flex-col lg:flex-row w-full lg:w-auto p-3 text-gray-800 border border-b text-center lg:table-cell relative lg:static">
                                 <!--<span class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">Acciones</span>-->
@@ -130,7 +130,7 @@
                                         Editar
                                     </button>
                                 </a>
-                                <a href="index.php?modulo=eliminar&id=<?php echo $fila['id'] ?>&tipo=chacras" class="text-red-400 hover:text-red-600 mt-2 lg:mt-0">
+                                <a href="index.php?modulo=eliminar&id=<?php echo $fila['id'] ?>&tipo=puntos" class="text-red-400 hover:text-red-600 mt-2 lg:mt-0">
                                     <button class="middle none center mr-4 rounded-lg bg-red-800 py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-red-500/20 transition-all hover:shadow-lg hover:shadow-red-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" data-ripple-light="true">
                                         Eliminar
                                     </button>

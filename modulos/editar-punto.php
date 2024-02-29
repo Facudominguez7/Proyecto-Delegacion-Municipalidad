@@ -46,7 +46,7 @@ if (isset($_GET['accion'])) {
         <div class="mx-auto w-full max-w-[550px]">
             <?php
             $idPunto = $_GET['idPunto'];
-            $sql = "SELECT puntos.id, puntos.titulo, chacras.nombre as nombreChacra, ST_X(puntos.ubicacion) as latitud, ST_Y(puntos.ubicacion) as longitud 
+            $sql = "SELECT puntos.id, puntos.titulo, chacras.nombre as nombreChacra, chacras.id as idChacra, ST_X(puntos.ubicacion) as latitud, ST_Y(puntos.ubicacion) as longitud 
             From puntos 
             INNER JOIN chacras ON puntos.idChacra = chacras.id 
             WHERE puntos.id = $idPunto";
@@ -58,15 +58,11 @@ if (isset($_GET['accion'])) {
             <form action="index.php?modulo=editar-punto&accion=editar" method="POST">
                 <div class="mb-5">
                     <label for="name" class="mb-3 block text-base font-medium text-[#07074D]">
-                        Título
+                        Dirección
                     </label>
-                    <input type="text" name="titulo" id="titulo" value="<?php echo $r['titulo'] ?>" placeholder="Nombre de la chacra" class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
+                    <input type="text" name="titulo" id="titulo" value="<?php echo $r['titulo'] ?>" placeholder="Dirección del Punto" class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
                 </div>
                 <div class="mb-5">
-                    <label for="name" class="mb-3 block text-base font-medium text-[#07074D]">
-                        Chacra Actual
-                    </label>
-                    <input type="text"  value="<?php echo $r['nombreChacra'] ?>" placeholder="Nombre de la chacra" class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" readonly />
                     <label for="name" class="mt-2 mb-3 block text-base font-medium text-[#07074D]">
                         Seleccione la nueva chacra
                     </label>
@@ -76,11 +72,14 @@ if (isset($_GET['accion'])) {
                         $stmtChacras = mysqli_prepare($con, $sqlMostrarChacras);
                         mysqli_stmt_execute($stmtChacras);
                         $resultChacras = mysqli_stmt_get_result($stmtChacras);
+                        $chacra_actual = $r['idChacra'];
 
                         if ($resultChacras->num_rows > 0) {
                             while ($filaChacras = mysqli_fetch_array($resultChacras)) {
+                                // Verificar si es la chacra actual y establecerla como seleccionada por defecto
+                                $selected = ($filaChacras['id'] == $chacra_actual) ? "selected" : "";
                         ?>
-                                <option value="<?php echo $filaChacras['id'] ?>"><?php echo $filaChacras['nombre'] ?></option>
+                                <option value="<?php echo $filaChacras['id'] ?>" <?php echo $selected ?>><?php echo $filaChacras['nombre'] ?></option>
                             <?php
                             }
                         } else {
