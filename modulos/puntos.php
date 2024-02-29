@@ -51,105 +51,100 @@
         </button>
     </a>
 </div>
-<div class="mt-10 flex justify-center flex-wrap gap-5 mb-10">
-    <?php
-    if (isset($_GET['buscar'])) {
-        $busqueda = $_GET['buscar'];
-        $sqlbusqueda = "SELECT puntos.id, puntos.fecha, puntos.descripcion, puntos.titulo, ST_X(ubicacion) AS latitud, ST_Y(ubicacion) AS longitud  FROM puntos WHERE titulo LIKE '$busqueda%'";
-        $datosBusqueda = mysqli_query($con, $sqlbusqueda);
-        if ($datosBusqueda->num_rows > 0) {
-            while ($filabus = mysqli_fetch_array($datosBusqueda)) {
-
-    ?>
-                <div class="relative flex w-full max-w-[26rem] flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-lg">
-                    <div class="relative mx-4 mt-4 overflow-hidden rounded-xl bg-blue-gray-500 bg-clip-border text-white shadow-lg shadow-blue-gray-500/40 flex justify-center items-center">
-                        <div class="map-container block w-96 h-96" data-latitud="<?php echo $filabus['latitud']; ?>" data-longitud="<?php echo $filabus['longitud']; ?>">
-
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <div class="mb-3 flex items-center justify-between">
-                            <h5 class="block font-sans text-xl font-medium leading-snug tracking-normal text-blue-gray-900 antialiased">
-                                <?php echo $filabus['titulo'] ?>
-                            </h5>
-                            <h5 class="block font-sans text-xl font-medium leading-snug tracking-normal text-blue-gray-900 antialiased">
-                                <?php echo date('d/m/Y', strtotime($filabus['fecha'])); ?>
-                            </h5>
-                        </div>
-                        <div class="w-full">
-                            <textarea class="block w-full h-28 font-sans text-base font-light leading-relaxed text-gray-700 antialiased" readonly>
-                            <?php echo $filabus['descripcion'] ?>
-                        </textarea>
-                        </div>
-                    </div>
-                    <div class="p-6 pt-3">
-                        <div class="flex flex-row justify-between">
-                            <a href="index.php?modulo=detalle-puntos&idPunto=<?php echo $filabus['id'] ?>">
-                                <button class="block w-full select-none rounded-lg bg-blue-500 py-3.5 px-7 text-center align-middle font-sans text-sm font-bold uppercase text-white shadow-md shadow-blue-500/20 transition-all hover:shadow-lg hover:shadow-blue-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" type="button" data-ripple-light="true">
-                                    Detalles
-                                </button>
-                            </a>
-                            <a href="https://www.google.com/maps/dir/?api=1&destination=<?php echo $filabus['latitud']; ?>,<?php echo $filabus['longitud']; ?>" target="_blank" rel="noopener noreferrer">
-                                <button class="block w-full select-none rounded-lg bg-green-500 py-3.5 px-7 text-center align-middle font-sans text-sm font-bold uppercase text-white shadow-md shadow-green-500/20 transition-all hover:shadow-lg hover:shadow-green-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" type="button" data-ripple-light="true">
-                                    Ir
-                                </button>
-                            </a>
-                        </div>
-                    </div>
-                </div>
+<section class="mx-auto w-full max-w-full flex justify-center items-stretch pb-4 px-4 sm:px-6 lg:px-8">
+    <table class="border-collapse w-full mt-10">
+        <thead>
+            <tr>
+                <th class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell">Título</th>
+                <th class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell">Chacra</th>
+                <th class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
             <?php
-            }
-        }
-    } else {
-        $sqlMostrarPunto = "SELECT puntos.id, puntos.fecha, puntos.descripcion, puntos.titulo, ST_X(ubicacion) AS latitud, ST_Y(ubicacion) AS longitud  FROM puntos";
-        $conexion = mysqli_query($con, $sqlMostrarPunto);
-        if (mysqli_num_rows($conexion) != 0) {
-            while ($dato = mysqli_fetch_array($conexion)) {
+            if (isset($_GET['buscar'])) {
+                $busqueda = $_GET['buscar'];
+                $sqlbusqueda = "SELECT *, chacras.nombre AS nombreChacra FROM puntos INNER JOIN chacras ON puntos.idChacra = chacras.id  WHERE chacras.nombre LIKE '$busqueda%' OR puntos.titulo LIKE '$busqueda%'";
+                $datosBusqueda = mysqli_query($con, $sqlbusqueda);
+                if ($datosBusqueda->num_rows > 0) {
+                    while ($filabus = mysqli_fetch_array($datosBusqueda)) {
             ?>
-                <div class="relative flex w-full max-w-[26rem] flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-lg">
-                    <div class="relative mx-4 mt-4 overflow-hidden rounded-xl bg-blue-gray-500 bg-clip-border text-white shadow-lg shadow-blue-gray-500/40 flex justify-center items-center">
-                        <div class="map-container block w-96 h-96" data-latitud="<?php echo $dato['latitud']; ?>" data-longitud="<?php echo $dato['longitud']; ?>">
-
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <div class="mb-3 flex items-center justify-between">
-                            <h5 class="block font-sans text-xl font-medium leading-snug tracking-normal text-blue-gray-900 antialiased">
-                                <?php echo $dato['titulo'] ?>
-                            </h5>
-                            <h5 class="block font-sans text-xl font-medium leading-snug tracking-normal text-blue-gray-900 antialiased">
-                                <?php echo date('d/m/Y', strtotime($dato['fecha'])); ?>
-                            </h5>
-                        </div>
-                        <div class="w-full">
-                            <textarea class="block w-full h-28 font-sans text-base font-light leading-relaxed text-gray-700 antialiased" readonly>
-                                <?php echo $dato['descripcion'] ?>
-                            </textarea>
-                        </div>
-                    </div>
-                    <div class="p-6 pt-3">
-                        <div class="flex flex-row justify-between">
-                            <a href="index.php?modulo=detalle-puntos&idPunto=<?php echo $dato['id'] ?>">
-                                <button class="block w-full select-none rounded-lg bg-blue-500 py-3.5 px-7 text-center align-middle font-sans text-sm font-bold uppercase text-white shadow-md shadow-blue-500/20 transition-all hover:shadow-lg hover:shadow-blue-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" type="button" data-ripple-light="true">
-                                    Detalles
-                                </button>
-                            </a>
-                            <a href="https://www.google.com/maps/dir/?api=1&destination=<?php echo $dato['latitud']; ?>,<?php echo $dato['longitud']; ?>" target="_blank" rel="noopener noreferrer">
-                                <button class="block w-full select-none rounded-lg bg-green-500 py-3.5 px-7 text-center align-middle font-sans text-sm font-bold uppercase text-white shadow-md shadow-green-500/20 transition-all hover:shadow-lg hover:shadow-green-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" type="button" data-ripple-light="true">
-                                    Ir
-                                </button>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-
-    <?php
+                        <tr class="bg-white lg:hover:bg-gray-100 flex lg:table-row flex-row lg:flex-row flex-wrap lg:flex-no-wrap mb-10 lg:mb-0">
+                            <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">
+                                <span class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">Título</span>
+                                <?php echo $filabus['titulo'] ?>
+                            </td>
+                            <td class="w-full lg:w-auto p-3 text-gray-800 border border-b text-center block lg:table-cell relative lg:static">
+                                <span class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">Presidente</span>
+                                <?php echo $filabus['nombreChacra'] ?>
+                            </td>
+                            <td class="flex justify-center flex-col lg:flex-row w-full lg:w-auto p-3 text-gray-800 border border-b text-center lg:table-cell relative lg:static">
+                                <!--<span class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">Acciones</span>-->
+                                <a href="index.php?modulo=tareas-puntos&idPunto=<?php echo $filabus['id'] ?>" class="text-yellow-400 hover:text-yellow-600 mt-2 lg:mt-0">
+                                    <button class="middle none center mr-4 rounded-lg bg-yellow-800 py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-yellow-500/20 transition-all hover:shadow-lg hover:shadow-yellow-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" data-ripple-light="true">
+                                        Tareas
+                                    </button>
+                                </a>
+                                <a href="index.php?modulo=editar-punto&idPunto=<?php echo $filabus['id'] ?>" class="text-green-400 hover:text-green-600 mt-2 lg:mt-0">
+                                    <button class="middle none center mr-4 rounded-lg bg-green-800 py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-green-500/20 transition-all hover:shadow-lg hover:shadow-green-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" data-ripple-light="true">
+                                        Editar
+                                    </button>
+                                </a>
+                                <a href="index.php?modulo=eliminar&id=<?php echo $filabus['id'] ?>&tipo=chacras" class="text-red-400 hover:text-red-600 mt-2 lg:mt-0">
+                                    <button class="middle none center mr-4 rounded-lg bg-red-800 py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-red-500/20 transition-all hover:shadow-lg hover:shadow-red-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" data-ripple-light="true">
+                                        Eliminar
+                                    </button>
+                                </a>
+                            </td>
+                        </tr>
+                    <?php
+                    }
+                }
+            } else {
+                $sqlMostrarChacra = "SELECT puntos.id, puntos.titulo, puntos.idChacra, chacras.nombre AS nombreChacra 
+                FROM puntos 
+                INNER JOIN chacras ON puntos.idChacra = chacras.id  
+                ORDER BY chacras.nombre";
+                $datos = mysqli_query($con, $sqlMostrarChacra);
+                if ($datos->num_rows > 0) {
+                    while ($fila = mysqli_fetch_array($datos)) {
+                    ?>
+                        <tr class="bg-white lg:hover:bg-gray-100 flex lg:table-row flex-row lg:flex-row flex-wrap lg:flex-no-wrap mb-10 lg:mb-0">
+                            <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">
+                                <span class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">Título</span>
+                                <?php echo $fila['titulo'] ?>
+                            </td>
+                            <td class="w-full lg:w-auto p-3 text-gray-800 border border-b text-center block lg:table-cell relative lg:static">
+                                <span class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">Presidente</span>
+                                <?php echo $fila['nombreChacra'] ?>
+                            </td>
+                            <td class="flex justify-center flex-col lg:flex-row w-full lg:w-auto p-3 text-gray-800 border border-b text-center lg:table-cell relative lg:static">
+                                <!--<span class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">Acciones</span>-->
+                                <a href="index.php?modulo=tareas-puntos&idPunto=<?php echo $fila['id'] ?>" class="text-yellow-400 hover:text-yellow-600 mt-2 lg:mt-0">
+                                    <button class="middle none center mr-4 rounded-lg bg-yellow-800 py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-yellow-500/20 transition-all hover:shadow-lg hover:shadow-yellow-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" data-ripple-light="true">
+                                        Tareas
+                                    </button>
+                                </a>
+                                <a href="index.php?modulo=editar-punto&idPunto=<?php echo $fila['id'] ?>" class="text-green-400 hover:text-green-600 mt-2 lg:mt-0">
+                                    <button class="middle none center mr-4 rounded-lg bg-green-800 py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-green-500/20 transition-all hover:shadow-lg hover:shadow-green-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" data-ripple-light="true">
+                                        Editar
+                                    </button>
+                                </a>
+                                <a href="index.php?modulo=eliminar&id=<?php echo $fila['id'] ?>&tipo=chacras" class="text-red-400 hover:text-red-600 mt-2 lg:mt-0">
+                                    <button class="middle none center mr-4 rounded-lg bg-red-800 py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-red-500/20 transition-all hover:shadow-lg hover:shadow-red-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" data-ripple-light="true">
+                                        Eliminar
+                                    </button>
+                                </a>
+                            </td>
+                        </tr>
+            <?php
+                    }
+                }
             }
-        }
-    }
-    ?>
-</div>
+            ?>
+        </tbody>
+    </table>
+</section>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 <script defer>
     document.addEventListener('DOMContentLoaded', function() {

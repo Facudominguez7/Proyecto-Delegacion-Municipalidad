@@ -2,15 +2,14 @@
 if (!empty($_GET['accion'])) {
     if ($_GET['accion'] == 'agregar') {
         $titulo = $_POST['titulo'];
-        $fecha = $_POST['fecha'];
-        $descripcion = $_POST['descripcion'];
+        $idChacra = $_POST['chacra'];
         $latitud = $_POST['latitud'];
         $longitud = $_POST['longitud'];
 
         // Insertar datos en la tabla de puntos
-        $sqlInsertPuntos = "INSERT INTO puntos(titulo, fecha, descripcion, ubicacion) VALUES (?, ?, ?, ST_GeomFromText(?))";
+        $sqlInsertPuntos = "INSERT INTO puntos(idChacra, titulo, ubicacion) VALUES (?, ?, ST_GeomFromText(?))";
         $stmtPunto = mysqli_prepare($con, $sqlInsertPuntos);
-        mysqli_stmt_bind_param($stmtPunto, "ssss", $titulo, $fecha, $descripcion, $punto);
+        mysqli_stmt_bind_param($stmtPunto, "iss",$idChacra, $titulo, $punto);
         $punto = "POINT($latitud $longitud)";
         mysqli_stmt_execute($stmtPunto);
 
@@ -18,6 +17,7 @@ if (!empty($_GET['accion'])) {
             echo "<script>alert('Error al registrar el punto: " . mysqli_error($con) . "');</script>";
         } else {
             echo "<script>alert('Punto registrado correctamente');</script>";
+            /*
             // Obtener el ID del producto recién insertado
             $punto_id = mysqli_insert_id($con);
             // Manejar la subida de imágenes
@@ -53,7 +53,7 @@ if (!empty($_GET['accion'])) {
                 } else {
                     echo "<script>alert('Error al mover la imagen al directorio de destino: " . $archivoDestino . "');</script>";
                 }
-            }
+            }*/
 
             echo "<script>window.location='index.php?modulo=puntos';</script>";
         }
@@ -87,30 +87,51 @@ if (!empty($_GET['accion'])) {
                     <label for="titulo" class="mb-3 block text-base font-medium text-[#07074D]">
                         Título
                     </label>
-                    <input type="text" name="titulo" id="titulo" placeholder="Título de la Tarea" class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" required />
+                    <input type="text" name="titulo" id="titulo" placeholder="Nombre del punto" class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" required />
                 </div>
                 <div class="mb-5">
-                    <label for="fecha" class="mb-3 block text-base font-medium text-[#07074D]">
-                        Fecha
+                    <label for="chacra" class="mb-3 block text-base font-medium text-[#07074D]">
+                        Seleccione la chacra
                     </label>
-                    <input type="date" name="fecha" id="fecha" class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" required />
-                </div>
-                <div class="mb-5">
-                    <label for="descripcion" class="mb-3 block text-base font-medium text-[#07074D]">
-                        Descripción
-                    </label>
-                    <textarea name="descripcion" id="descripcion" class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" required> </textarea>
+                    <select name="chacra" id="chacra" class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" required>
+                        <?php
+                        $sqlMostrarChacras = "SELECT chacras.nombre, chacras.id FROM chacras ORDER BY chacras.nombre DESC";
+                        $stmtChacras = mysqli_prepare($con, $sqlMostrarChacras);
+                        mysqli_stmt_execute($stmtChacras);
+                        $resultChacras = mysqli_stmt_get_result($stmtChacras);
+
+                        if ($resultChacras->num_rows > 0) {
+                            while ($filaChacras = mysqli_fetch_array($resultChacras)) {
+                        ?>
+                                <option value="<?php echo $filaChacras['id'] ?>"><?php echo $filaChacras['nombre'] ?></option>
+                            <?php
+                            }
+                        } else {
+                            ?>
+                            <h1>No se agregaron chacras</h1>
+                        <?php
+                        }
+                        ?>
+                    </select>
                 </div>
                 <div class="mb-5">
                     <label for="ubicacion" class="flex justify-center mb-3 text-base font-medium text-[#07074D]">
-                        Ingrese la ubicación:
+                        Ubicación
                     </label>
-                    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+                    <div class="mb-5">
+                        <label for="ubicacion" class="flex justify-center mb-3 text-base font-medium text-[#07074D]">
+                            Ingrese la ubicación de Google Maps:
+                        </label>
+                        <input type="text" id="ubicacionInput" placeholder="Pegue aquí el enlace de Google Maps" class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" required />
+                        <button type="button" id="boton-ubicacion" class="bg-[#6A64F1] py-3 px-4 mt-2 text-base font-medium text-white rounded-md outline-none">Procesar</button>
+                    </div>
+                    <script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
                     <div id="mi_mapa"></div>
                     <input type="text" name="latitud" id="latitud" placeholder="Ej. 40.7128" class="hidden w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" required readonly />
                     <input type="text" name="longitud" id="longitud" placeholder="Ej. -74.0060" class="hidden w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" required readonly />
                 </div>
-                <div class="mb-5">
+                <!--
+                             <div class="mb-5">
                     <label class="mb-3 block text-base font-medium text-[#07074D]" for="imagen"> Agregar Fotos</label>
                     <div style="position: relative;">
                         <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-2 mt-2" id="lista" name="lista[]" type="file" multiple onchange="mostrarVistaPrevia()">
@@ -119,6 +140,8 @@ if (!empty($_GET['accion'])) {
                         </div>
                     </div>
                 </div>
+                -->
+           
                 <div>
                     <button type="submit" class="hover:shadow-form rounded-md bg-[#6A64F1] py-3 px-8 text-base font-semibold text-white outline-none">
                         Agregar
