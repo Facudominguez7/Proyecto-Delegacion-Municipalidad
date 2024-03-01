@@ -42,10 +42,10 @@ if (!empty($_GET['pdf']) && $_GET['pdf'] === 'ReporteActividadPorDia') {
     </nav>
     <header class="bg-gray-800 shadow">
         <div class="mx-auto max-w-7xl px-4 py-6 sm:px-3 lg:px-8">
-            <h1 class="text-xl sm:text-2xl lg:text-5xl font-bold tracking-tight text-white text-center mb-2">
+            <h1 class="text-xl sm:text-2xl lg:text-3xl font-bold tracking-tight text-white text-center mb-2">
                 delegación.municipal3233@gmail.com
             </h1>
-            <h1 class="text-lg sm:text-2xl lg:text-5xl font-bold tracking-tight text-white text-center">
+            <h1 class="text-lg sm:text-2xl lg:text-3xl font-bold tracking-tight text-white text-center">
                 Av. Gral. Lavalle 4637
             </h1>
         </div>
