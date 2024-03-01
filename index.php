@@ -24,6 +24,7 @@ if (!empty($_GET['pdf']) && $_GET['pdf'] === 'ReporteActividadPorDia') {
     <title>Plataforma Digital</title>
 </head>
 
+
 <body class="bg-gray-200">
     <nav>
         <div class="flex bg-gray-800 text-white top-0 py-5 flex-wrap justify-around bg-silver">
@@ -39,6 +40,18 @@ if (!empty($_GET['pdf']) && $_GET['pdf'] === 'ReporteActividadPorDia') {
             -->
         </div>
     </nav>
+    <header class="bg-gray-800 shadow">
+        <div class="mx-auto max-w-7xl px-4 py-6 sm:px-3 lg:px-8">
+            <h1 class="text-xl sm:text-2xl lg:text-5xl font-bold tracking-tight text-white text-center mb-2">
+                delegación.municipal3233@gmail.com
+            </h1>
+            <h1 class="text-lg sm:text-2xl lg:text-5xl font-bold tracking-tight text-white text-center">
+                Av. Gral. Lavalle 4637
+            </h1>
+        </div>
+    </header>
+
+
     <main>
         <?php
         if (!empty($_GET['modulo'])) {
@@ -61,7 +74,7 @@ if (!empty($_GET['pdf']) && $_GET['pdf'] === 'ReporteActividadPorDia') {
                 </a>
                 <a href="index.php?modulo=puntos">
                     <button class="group relative h-12 w-96 overflow-hidden rounded-2xl bg-green-500 text-lg font-bold text-white mb-5">
-                        Control puntos limpios
+                        Control Mini Basurales
                         <div class="absolute inset-0 h-full w-full scale-0 rounded-2xl transition-all duration-300 group-hover:scale-100 group-hover:bg-white/30"></div>
                     </button>
                 </a>

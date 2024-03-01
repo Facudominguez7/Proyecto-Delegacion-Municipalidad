@@ -39,18 +39,20 @@
     </div>
 </form>
 
-<div class="flex justify-center flex-row mt-10 mb-0">
-    <a href="index.php?modulo=agregar-chacra">
-        <button class="middle none center mr-4 rounded-lg bg-gray-800 py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-gray-500/20 transition-all hover:shadow-lg hover:shadow-gray-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" data-ripple-light="true">
+<div class="flex justify-center flex-col items-center lg:flex-row lg:justify-evenly mt-10 mb-0">
+    <a href="index.php?modulo=agregar-chacra" class="mb-4 lg:mb-0 lg:mr-4">
+        <button class="rounded-lg bg-gray-800 py-3 px-6 font-sans text-xs lg:text-sm font-bold uppercase text-white shadow-md shadow-gray-500/20 transition-all hover:shadow-lg hover:shadow-gray-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" data-ripple-light="true">
             Agregar Chacra
         </button>
     </a>
     <a href="index.php?pdf=ReporteActividadPorDia" target="_blank">
-        <button class="middle none center mr-4 rounded-lg bg-gray-800 py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-gray-500/20 transition-all hover:shadow-lg hover:shadow-gray-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" data-ripple-light="true">
+        <button class="rounded-lg bg-gray-800 py-3 px-6 font-sans text-xs lg:text-sm font-bold uppercase text-white shadow-md shadow-gray-500/20 transition-all hover:shadow-lg hover:shadow-gray-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" data-ripple-light="true">
             Generar Reporte PDF del día
         </button>
     </a>
 </div>
+
+
 <section class="mx-auto w-full max-w-full flex justify-center items-stretch pb-4 px-4 sm:px-6 lg:px-8">
     <table class="border-collapse w-full mt-10">
         <thead>
