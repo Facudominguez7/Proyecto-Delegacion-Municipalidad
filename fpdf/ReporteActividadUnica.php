@@ -18,32 +18,32 @@ class PDF extends FPDF
         $this->Cell(45); // Movernos a la derecha
         $this->SetTextColor(0, 0, 0); //color
         //creamos una celda o fila
-        $this->Cell(110, 15, utf8_decode('Delegación Chacra 32-33'), 1, 1, 'C', 0); // AnchoCelda,AltoCelda,titulo,borde(1-0),saltoLinea(1-0),posicion(L-C-R),ColorFondo(1-0)
+        $this->Cell(110, 15,('Delegación Chacra 32-33'), 1, 1, 'C', 0); // AnchoCelda,AltoCelda,titulo,borde(1-0),saltoLinea(1-0),posicion(L-C-R),ColorFondo(1-0)
         $this->Ln(3); // Salto de línea
         $this->SetTextColor(103); //color
 
          /* Delegado */
          $this->Cell(110);  // mover a la derecha
          $this->SetFont('Arial', 'B', 10);
-         $this->Cell(96, 10, utf8_decode("Delegado : Rolando Olmedo"), 0, 0, '', 0);
+         $this->Cell(96, 10, ("Delegado : Rolando Olmedo"), 0, 0, '', 0);
          $this->Ln(5);
 
         /* UBICACION */
         $this->Cell(110);  // mover a la derecha
         $this->SetFont('Arial', 'B', 10);
-        $this->Cell(96, 10, utf8_decode("Ubicación : Av. Gral. Lavalle 4637"), 0, 0, '', 0);
+        $this->Cell(96, 10, ("Ubicación : Av. Gral. Lavalle 4637"), 0, 0, '', 0);
         $this->Ln(5);
 
         /* TELEFONO */
         $this->Cell(110);  // mover a la derecha
         $this->SetFont('Arial', 'B', 10);
-        $this->Cell(59, 10, utf8_decode("Teléfono : 3764634383"), 0, 0, '', 0);
+        $this->Cell(59, 10, ("Teléfono : 3764634383"), 0, 0, '', 0);
         $this->Ln(5);
 
         /* COREEO */
         $this->Cell(110);  // mover a la derecha
         $this->SetFont('Arial', 'B', 10);
-        $this->Cell(85, 10, utf8_decode("Correo : Pepeolmedo291@gmail.com "), 0, 0, '', 0);
+        $this->Cell(85, 10, ("Correo : Pepeolmedo291@gmail.com "), 0, 0, '', 0);
         $this->Ln(10);
 
 
@@ -53,7 +53,7 @@ class PDF extends FPDF
         $this->SetTextColor(228, 100, 0);
         $this->Cell(50); // mover a la derecha
         $this->SetFont('Arial', 'B', 15);
-        $this->Cell(100, 10, utf8_decode("REPORTE DE ACTIVIDAD "), 0, 1, 'C', 0);
+        $this->Cell(100, 10, ("REPORTE DE ACTIVIDAD "), 0, 1, 'C', 0);
         $this->Ln(7);
 
     }
@@ -63,12 +63,12 @@ class PDF extends FPDF
     {
         $this->SetY(-15); // Posición: a 1,5 cm del final
         $this->SetFont('Arial', 'I', 8); //tipo fuente, negrita(B-I-U-BIU), tamañoTexto
-        $this->Cell(0, 10, utf8_decode('Página ') . $this->PageNo() . '/{nb}', 0, 0, 'C'); //pie de pagina(numero de pagina)
+        $this->Cell(0, 10, ('Página ') . $this->PageNo() . '/{nb}', 0, 0, 'C'); //pie de pagina(numero de pagina)
 
         $this->SetY(-15); // Posición: a 1,5 cm del final
         $this->SetFont('Arial', 'I', 8); //tipo fuente, cursiva, tamañoTexto
         $hoy = date('d/m/Y');
-        $this->Cell(355, 10, utf8_decode($hoy), 0, 0, 'C'); // pie de pagina(fecha de pagina)
+        $this->Cell(355, 10, ($hoy), 0, 0, 'C'); // pie de pagina(fecha de pagina)
     }
 }
 
@@ -81,7 +81,7 @@ class PDF extends FPDF
 include_once './includes/conexion.php';
 /* CONSULTA INFORMACION DEL HOSPEDAJE */
 
-$pdf = new PDF('P', 'mm', 'A4');
+$pdf = new PDF('P', 'mm', 'A4', true);
 $pdf->AddPage(); /* aqui entran dos para parametros (horientazion,tamaño)V->portrait H->landscape tamaño (A3.A4.A5.letter.legal) */
 $pdf->AliasNbPages(); //muestra la pagina / y total de paginas
 
@@ -99,23 +99,23 @@ $consulta_reporte_actividad = $con->query("SELECT tareas.id, tareas.titulo, tare
 
 while ($datos_reporte = $consulta_reporte_actividad->fetch_object()) {
     // Crear las celdas de la tabla para cada registro
-    $pdf->Cell(18, 10, utf8_decode('N°'), 1, 0, 'C', 0);
-    $pdf->Cell(30, 10, utf8_decode('CHACRA'), 1, 0, 'C', 0);
-    $pdf->Cell(70, 10, utf8_decode('TÍTULO'), 1, 0, 'C', 0);
-    $pdf->Cell(25, 10, utf8_decode('FECHA'), 1, 1, 'C', 0);
+    $pdf->Cell(18, 10, ('N°'), 1, 0, 'C', 0);
+    $pdf->Cell(30, 10, ('CHACRA'), 1, 0, 'C', 0);
+    $pdf->Cell(70, 10, ('TÍTULO'), 1, 0, 'C', 0);
+    $pdf->Cell(25, 10, ('FECHA'), 1, 1, 'C', 0);
 
     // Contenido de cada celda
-    $pdf->Cell(18, 10, utf8_decode($datos_reporte->id), 1, 0, 'C', 0);
-    $pdf->Cell(30, 10, utf8_decode($datos_reporte->nombreChacra), 1, 0, 'C', 0);
-    $pdf->Cell(70, 10, utf8_decode($datos_reporte->titulo), 1, 0, 'C', 0);
+    $pdf->Cell(18, 10, ($datos_reporte->id), 1, 0, 'C', 0);
+    $pdf->Cell(30, 10, ($datos_reporte->nombreChacra), 1, 0, 'C', 0);
+    $pdf->Cell(70, 10, ($datos_reporte->titulo), 1, 0, 'C', 0);
     $pdf->Cell(25, 10, date('d/m/Y', strtotime($datos_reporte->fecha)), 1, 1, 'L', 0);
 
     // Obtener la descripción
-    $descripcion = utf8_decode($datos_reporte->descripcion);
+    $descripcion = ($datos_reporte->descripcion);
     
     // Dibujar el campo de descripción debajo de la tabla
-    $pdf->Cell(18+30+70+25, 10, utf8_decode('Descripción:'), 'LTR', 1, 'C', 0); // Título del campo de descripción
-    $pdf->MultiCell(18+30+70+25, 10, utf8_decode($descripcion), 'LRB', 'C'); // Contenido del campo de descripción
+    $pdf->Cell(18+30+70+25, 10, ('Descripción:'), 'LTR', 1, 'C', 0); // Título del campo de descripción
+    $pdf->MultiCell(18+30+70+25, 10, ($descripcion), 'LRB', 'C'); // Contenido del campo de descripción
     
     // Agregar un salto de línea después de cada registro
     $pdf->Ln(5);
