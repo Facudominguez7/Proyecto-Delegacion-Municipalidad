@@ -28,16 +28,23 @@ if (!empty($_GET['pdf']) && $_GET['pdf'] === 'ReporteActividadPorDia') {
 <body class="bg-gray-200">
     <nav>
         <div class="flex bg-gray-800 text-white top-0 py-5 flex-wrap justify-around bg-silver">
-            <a href="index.php">
-                <h1 class="text-lg font-semibold">Delegación 32-33</h1>
-            </a>
-            <!-- 
+            <div class="flex flex-col">
+                <a href="index.php" >
+                    <h1 class="text-xl text-center font-semibold">Delegación 32-33</h1>
+                </a>
                 <ul class="flex gap-[40px] text-m mt-2">
-                <li>Iniciar Sesión</li>
-                <li>Registrarse</li>
-                <li>contact</li>
-            </ul>
-            -->
+                    <li>
+                        <a href="index.php?modulo=registro">
+                            <h1 class="text-lg font-semibold">Registrarse</h1>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="index.php">
+                            <h1 class="text-lg font-semibold">Iniciar Sesión</h1>
+                        </a>
+                    </li>
+                </ul>
+            </div>
         </div>
     </nav>
     <header class="bg-gray-800 shadow">
