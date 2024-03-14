@@ -10,6 +10,9 @@ if (!empty($_GET['pdf']) && $_GET['pdf'] === 'ReporteActividadPorDia') {
 } else if (!empty($_GET['pdf']) && $_GET['pdf'] === 'ReporteActividadUnica') {
     require('./fpdf/ReporteActividadUnica.php');
     exit;
+} else if (!empty($_GET['pdf']) && $_GET['pdf'] === 'ReporteInformeUnico') {
+    require('./fpdf/ReporteInformeUnico.php');
+    exit;
 }
 
 ?>

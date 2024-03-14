@@ -53,7 +53,7 @@ class PDF extends FPDF
         $this->SetTextColor(228, 100, 0);
         $this->Cell(50); // mover a la derecha
         $this->SetFont('Arial', 'B', 15);
-        $this->Cell(100, 10, ("REPORTE DE ACTIVIDAD "), 0, 1, 'C', 0);
+        $this->Cell(100, 10, ("REPORTE DE INFORME "), 0, 1, 'C', 0);
         $this->Ln(7);
 
     }
@@ -89,33 +89,30 @@ $i = 0;
 $pdf->SetFont('Arial', '', 12);
 $pdf->SetDrawColor(163, 163, 163); //colorBorde
 
-$idTarea = $_GET['idTarea'];
-$consulta_reporte_actividad = $con->query("SELECT tareas.id, tareas.titulo, tareas.descripcion, tareas.fecha, chacras.nombre AS nombreChacra
-                                           FROM tareas 
-                                           INNER JOIN chacras ON tareas.idChacra = chacras.id 
-                                           WHERE tareas.id = $idTarea");
+$idInforme = $_GET['idInforme'];
+$consulta_reporte_informe = $con->query("SELECT Id.id, Id.titulo, Id.descripcion, Id.fecha
+                                           FROM informes_diarios as Id 
+                                           WHERE Id.id = $idInforme");
 
 
 
-while ($datos_reporte = $consulta_reporte_actividad->fetch_object()) {
+while ($datos_reporte = $consulta_reporte_informe->fetch_object()) {
     // Crear las celdas de la tabla para cada registro
-    $pdf->Cell(18, 10, ('N°'), 1, 0, 'C', 0);
-    $pdf->Cell(30, 10, ('CHACRA'), 1, 0, 'C', 0);
-    $pdf->Cell(70, 10, ('TÍTULO'), 1, 0, 'C', 0);
-    $pdf->Cell(25, 10, ('FECHA'), 1, 1, 'C', 0);
+    $pdf->Cell(40, 10, ('N°'), 1, 0, 'C', 0);
+    $pdf->Cell(100, 10, ('TÍTULO'), 1, 0, 'C', 0);
+    $pdf->Cell(40, 10, ('FECHA'), 1, 1, 'C', 0);
 
     // Contenido de cada celda
-    $pdf->Cell(18, 10, ($datos_reporte->id), 1, 0, 'C', 0);
-    $pdf->Cell(30, 10, ($datos_reporte->nombreChacra), 1, 0, 'C', 0);
-    $pdf->Cell(70, 10, ($datos_reporte->titulo), 1, 0, 'C', 0);
-    $pdf->Cell(25, 10, date('d/m/Y', strtotime($datos_reporte->fecha)), 1, 1, 'L', 0);
+    $pdf->Cell(40, 10, ($datos_reporte->id), 1, 0, 'C', 0);
+    $pdf->Cell(100, 10, ($datos_reporte->titulo), 1, 0, 'C', 0);
+    $pdf->Cell(40, 10, date('d/m/Y', strtotime($datos_reporte->fecha)), 1, 1, 'C', 0);
 
     // Obtener la descripción
     $descripcion = ($datos_reporte->descripcion);
     
     // Dibujar el campo de descripción debajo de la tabla
-    $pdf->Cell(18+30+70+25, 10, ('Descripción:'), 'LTR', 1, 'C', 0); // Título del campo de descripción
-    $pdf->MultiCell(18+30+70+25, 10, ($descripcion), 'LRB', 'C'); // Contenido del campo de descripción
+    $pdf->Cell(40+30+70+40, 10, ('Descripción:'), 'LTR', 1, 'C', 0); // Título del campo de descripción
+    $pdf->MultiCell(40+30+70+40, 10, ($descripcion), 'LRB', 'C'); // Contenido del campo de descripción
     
     // Agregar un salto de línea después de cada registro
     $pdf->Ln(5);
