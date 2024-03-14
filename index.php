@@ -22,6 +22,7 @@ if (!empty($_GET['pdf']) && $_GET['pdf'] === 'ReporteActividadPorDia') {
     <link rel="stylesheet" href="estilos/output.css">
     <link rel="shortcut icon" type="image/jpg" href="Imagenes/logo-delegacion.jpg">
     <title>Plataforma Digital</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 
@@ -82,6 +83,12 @@ if (!empty($_GET['pdf']) && $_GET['pdf'] === 'ReporteActividadPorDia') {
                 <a href="index.php?modulo=puntos">
                     <button class="group relative h-12 w-96 overflow-hidden rounded-2xl bg-green-500 text-lg font-bold text-white mb-5">
                         Control Mini Basurales
+                        <div class="absolute inset-0 h-full w-full scale-0 rounded-2xl transition-all duration-300 group-hover:scale-100 group-hover:bg-white/30"></div>
+                    </button>
+                </a>
+                <a href="index.php?modulo=informe-diario">
+                    <button class="group relative h-12 w-96 overflow-hidden rounded-2xl bg-green-500 text-lg font-bold text-white mb-5">
+                        Informe Diario
                         <div class="absolute inset-0 h-full w-full scale-0 rounded-2xl transition-all duration-300 group-hover:scale-100 group-hover:bg-white/30"></div>
                     </button>
                 </a>

@@ -65,7 +65,7 @@ if (isset($_GET['accion']) && $_GET['accion'] == 'editar') {
 <div class="mt-5 ml-60 flex justify-start">
     <?php $idPunto = $_GET['idPunto'] ?>
     <a href="index.php?modulo=tareas-puntos&idPunto=<?php echo $idPunto ?>">
-        <button class="middle none center mr-4 rounded-lg bg-gray-800 py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-gray-500/20 transition-all hover:shadow-lg hover:shadow-gray-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" data-ripple-light="true">
+        <button class="md:mb-0 mb-5  middle none center mr-4 rounded-lg bg-gray-800 py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-gray-500/20 transition-all hover:shadow-lg hover:shadow-gray-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" data-ripple-light="true">
             Volver
         </button>
     </a>

@@ -42,27 +42,66 @@ if (isset($_GET['accion'])) {
 
                 // Verificar si se produjeron errores
                 if (mysqli_error($con)) {
-                    echo "<script>alert('Error al eliminar la tarea: " . mysqli_error($con) . "');</script>";
+                    echo '<script> 
+                    Swal.fire({
+                        title: "¡Error al eliminar la tarea!",
+                        text: "Ocurrió un error al intentar eliminar la tarea: ' . mysqli_error($con) . '",
+                        icon: "error",
+                        confirmButtonColor: "#d33",
+                        confirmButtonText: "Aceptar"
+                        willClose: () => {
+                            window.location.href = "index.php?modulo=tareas&idChacra='. $idChacra .'";
+                        }
+                    }); 
+                </script>';
                 } else {
-                    echo "<script>alert('Tarea Eliminada con éxito');</script>";
+                    $idChacra = $_GET['idChacra'];
+                    echo '<script> 
+                    Swal.fire({
+                        title: "¡Tarea eliminada con éxito!",
+                        icon: "success",
+                        confirmButtonColor: "#4caf50",
+                        confirmButtonText: "Aceptar",
+                        willClose: () => {
+                            window.location.href = "index.php?modulo=tareas&idChacra='. $idChacra .'";
+                        }
+                    }); 
+                </script>';
                 }
             }
             // Cerrar las declaraciones preparadas
             mysqli_stmt_close($stmtEliminarImagenes);
             mysqli_stmt_close($stmtEliminarTarea);
-
-            $idChacra = $_GET['idChacra'];
-            echo "<script>window.location='index.php?modulo=tareas&idChacra=" . $idChacra . "';</script>";
             break;
         case 'eliminar-chacras':
-            echo $sql = "DELETE FROM chacras WHERE id = $id";
+            $sql = "DELETE FROM chacras WHERE id = $id";
             $sql = mysqli_query($con, $sql);
             if (!mysqli_error($con)) {
-                echo "<script> alert('Chacra eliminada con éxito');</script>";
+                echo '<script> 
+                Swal.fire({
+                    title: "¡Chacra eliminada con éxito!",
+                    icon: "success",
+                    confirmButtonColor: "#4caf50",
+                    confirmButtonText: "Aceptar",
+                    willClose: () => {
+                        window.location.href = "index.php?modulo=chacras";
+                    }
+                }); 
+            </script>';
             } else {
-                echo "<script> alert('ERROR, no se pudo eliminar');</script>";
+                echo '<script> 
+                Swal.fire({
+                    title: "¡Error al eliminar la chacra!",
+                    text: "Ocurrió un error al intentar eliminar la chacra: ' . mysqli_error($con) . '",
+                    icon: "error",
+                    confirmButtonColor: "#d33",
+                    confirmButtonText: "Aceptar"
+                    willClose: () => {
+                        window.location.href = "index.php?modulo=chacras";
+                    }
+                }); 
+            </script>';
             }
-            echo "<script>window.location='index.php?modulo=chacras';</script>";
             break;
         case 'eliminar-puntos':
             // Eliminar el punto
@@ -72,13 +111,69 @@ if (isset($_GET['accion'])) {
             mysqli_stmt_execute($stmtEliminarPunto);
 
             if (!mysqli_error($con)) {
-                echo "<script>alert('Punto eliminado con éxito');</script>";
+                echo '<script> 
+                Swal.fire({
+                    title: "¡Punto eliminado con éxito!",
+                    icon: "success",
+                    confirmButtonColor: "#4caf50",
+                    confirmButtonText: "Aceptar",
+                    willClose: () => {
+                        window.location.href = "index.php?modulo=puntos";
+                    }
+                }); 
+            </script>';
             } else {
-                echo "<script>alert('ERROR, no se pudo eliminar el punto: " . mysqli_error($con) . "');</script>";
+                echo '<script> 
+                Swal.fire({
+                    title: "¡Error al eliminar el punto!",
+                    text: "Ocurrió un error al intentar eliminar el punto: ' . mysqli_error($con) . '",
+                    icon: "error",
+                    confirmButtonColor: "#d33",
+                    confirmButtonText: "Aceptar"
+                    willClose: () => {
+                        window.location.href = "index.php?modulo=puntos";
+                    }
+                }); 
+            </script>';
             }
-
             mysqli_stmt_close($stmtEliminarPunto);
-            echo "<script>window.location='index.php?modulo=puntos';</script>";
+            break;
+        case 'eliminar-informes':
+            // Eliminar el Informe
+            $sql = "DELETE FROM informes_diarios WHERE id = ?";
+            $stmt = mysqli_prepare($con, $sql);
+            mysqli_stmt_bind_param($stmt, "i", $id);
+            mysqli_stmt_execute($stmt);
+
+            if (!mysqli_error($con)) {
+                echo '<script> 
+                        Swal.fire({
+                            title: "¡Informe eliminado con éxito!",
+                            icon: "success",
+                            confirmButtonColor: "#4caf50",
+                            confirmButtonText: "Aceptar",
+                            willClose: () => {
+                                window.location.href = "index.php?modulo=informe-diario";
+                            }
+                        }); 
+                    </script>';
+
+            } else {
+                echo '<script> 
+                        Swal.fire({
+                            title: "¡Error al eliminar el informe!",
+                            text: "Ocurrió un error al intentar eliminar el informe: ' . mysqli_error($con) . '",
+                            icon: "error",
+                            confirmButtonColor: "#d33",
+                            confirmButtonText: "Aceptar"
+                            willClose: () => {
+                                window.location.href = "index.php?modulo=informe-diario";
+                            }
+                        }); 
+                    </script>';
+
+            }
+            mysqli_stmt_close($stmt);
             break;
     }
 }
@@ -97,7 +192,7 @@ if (isset($_GET['accion'])) {
                 </div>
                 <div class="row">
                     <div class="col-sm-6">
-                        <?php if ($tipo === 'tareas' || $tipo === 'chacras' || $tipo === 'puntos') {
+                        <?php if ($tipo === 'tareas' || $tipo === 'chacras' || $tipo === 'puntos' || $tipo === 'informes') {
                             if (isset($_GET['idChacra'])) {
                                 $idChacra = $_GET['idChacra'];
                         ?>
@@ -109,7 +204,6 @@ if (isset($_GET['accion'])) {
                                     <?php
                                 }
                                     ?>
-
                                     <input type="hidden" name="accion" value="eliminar_registro">
                                     <input type="hidden" name="id" value="<?php echo $id; ?>">
                                     <input type="submit" name="" value="Eliminar" class=" btn btn-danger">
