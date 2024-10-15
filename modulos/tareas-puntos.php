@@ -100,7 +100,7 @@
                         </td>
                         <td class="flex justify-center flex-col xl:flex-row w-full xl:w-auto p-3 text-gray-800 border border-b text-center xl:table-cell relative xl:static">
                             <?php $idPunto = $_GET['idPunto'] ?>
-                            <a href="index.php?modulo=detalle-puntos&idPunto=<?php echo $fila['id'] ?>" class="text-yellow-400 hover:text-yellow-600">
+                            <a href="index.php?modulo=detalle-puntos&id=<?php echo $fila['id'] ?>&idPunto=<?php echo $idPunto?>" class="text-yellow-400 hover:text-yellow-600">
                                 <button class="mb-2 xl:mb-0 middle none center mr-4 rounded-lg bg-yellow-800 py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-yellow-500/20 transition-all hover:shadow-lg hover:shadow-yellow-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" data-ripple-light="true">
                                     Detalles
                                 </button>

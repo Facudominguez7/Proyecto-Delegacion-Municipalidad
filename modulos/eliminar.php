@@ -48,7 +48,7 @@ if (isset($_GET['accion'])) {
                         text: "Ocurrió un error al intentar eliminar la tarea: ' . mysqli_error($con) . '",
                         icon: "error",
                         confirmButtonColor: "#d33",
-                        confirmButtonText: "Aceptar"
+                        confirmButtonText: "Aceptar",
                         willClose: () => {
                             window.location.href = "index.php?modulo=tareas&idChacra='. $idChacra .'";
                         }
@@ -95,7 +95,7 @@ if (isset($_GET['accion'])) {
                     text: "Ocurrió un error al intentar eliminar la chacra: ' . mysqli_error($con) . '",
                     icon: "error",
                     confirmButtonColor: "#d33",
-                    confirmButtonText: "Aceptar"
+                    confirmButtonText: "Aceptar",
                     willClose: () => {
                         window.location.href = "index.php?modulo=chacras";
                     }
@@ -129,7 +129,7 @@ if (isset($_GET['accion'])) {
                     text: "Ocurrió un error al intentar eliminar el punto: ' . mysqli_error($con) . '",
                     icon: "error",
                     confirmButtonColor: "#d33",
-                    confirmButtonText: "Aceptar"
+                    confirmButtonText: "Aceptar",
                     willClose: () => {
                         window.location.href = "index.php?modulo=puntos";
                     }
@@ -165,7 +165,7 @@ if (isset($_GET['accion'])) {
                             text: "Ocurrió un error al intentar eliminar el informe: ' . mysqli_error($con) . '",
                             icon: "error",
                             confirmButtonColor: "#d33",
-                            confirmButtonText: "Aceptar"
+                            confirmButtonText: "Aceptar",
                             willClose: () => {
                                 window.location.href = "index.php?modulo=informe-diario";
                             }
@@ -174,6 +174,41 @@ if (isset($_GET['accion'])) {
 
             }
             mysqli_stmt_close($stmt);
+            break;
+        case 'eliminar-des':
+            // Eliminar el des
+            $sqlEliminarDes = "DELETE FROM desmalezamientos WHERE id = ?";
+            $stmtEliminarDes = mysqli_prepare($con, $sqlEliminarDes);
+            mysqli_stmt_bind_param($stmtEliminarDes, "i", $id);
+            mysqli_stmt_execute($stmtEliminarDes);
+
+            if (!mysqli_error($con)) {
+                echo '<script> 
+                Swal.fire({
+                    title: "¡Tarea eliminada con éxito!",
+                    icon: "success",
+                    confirmButtonColor: "#4caf50",
+                    confirmButtonText: "Aceptar",
+                    willClose: () => {
+                        window.location.href = "index.php?modulo=des";
+                    }
+                }); 
+            </script>';
+            } else {
+                echo '<script> 
+                Swal.fire({
+                    title: "¡Error al eliminar la Tarea!",
+                    text: "Ocurrió un error al intentar eliminar la Tarea: ' . mysqli_error($con) . '",
+                    icon: "error",
+                    confirmButtonColor: "#d33",
+                    confirmButtonText: "Aceptar",
+                    willClose: () => {
+                        window.location.href = "index.php?modulo=des";
+                    }
+                }); 
+            </script>';
+            }
+            mysqli_stmt_close($stmtEliminarDes);
             break;
     }
 }
@@ -192,7 +227,7 @@ if (isset($_GET['accion'])) {
                 </div>
                 <div class="row">
                     <div class="col-sm-6">
-                        <?php if ($tipo === 'tareas' || $tipo === 'chacras' || $tipo === 'puntos' || $tipo === 'informes') {
+                        <?php if ($tipo === 'tareas' || $tipo === 'chacras' || $tipo === 'puntos' || $tipo === 'informes' || $tipo === 'des') {
                             if (isset($_GET['idChacra'])) {
                                 $idChacra = $_GET['idChacra'];
                         ?>

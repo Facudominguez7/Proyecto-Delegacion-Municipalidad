@@ -72,7 +72,7 @@ if (isset($_GET['accion']) && $_GET['accion'] == 'editar') {
 </div>
 <section class="mt-10">
     <?php
-    $idPunto = $_GET['idPunto'];
+    $idPunto = $_GET['id'];
     $sqlMostrarDetallePunto = "SELECT * FROM tareas_puntos WHERE id = $idPunto";
     $datos = mysqli_query($con, $sqlMostrarDetallePunto);
     if ($datos->num_rows > 0) {

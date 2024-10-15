@@ -36,7 +36,7 @@ if (!empty($_GET['pdf']) && $_GET['pdf'] === 'ReporteActividadPorDia') {
                 <a href="index.php" >
                     <h1 class="text-xl text-center font-semibold">Delegación 32-33</h1>
                 </a>
-                <ul class="flex gap-[40px] text-m mt-2">
+                <ul class=" flex gap-[40px] text-m mt-2 hidden">
                     <li>
                         <a href="index.php?modulo=registro">
                             <h1 class="text-lg font-semibold">Registrarse</h1>
@@ -80,6 +80,12 @@ if (!empty($_GET['pdf']) && $_GET['pdf'] === 'ReporteActividadPorDia') {
                 <a href="index.php?modulo=chacras">
                     <button class="group relative h-12 w-96 overflow-hidden rounded-2xl bg-green-500 text-lg font-bold text-white mb-5">
                         Chacras
+                        <div class="absolute inset-0 h-full w-full scale-0 rounded-2xl transition-all duration-300 group-hover:scale-100 group-hover:bg-white/30"></div>
+                    </button>
+                </a>
+                <a href="index.php?modulo=des">
+                    <button class="group relative h-12 w-96 overflow-hidden rounded-2xl bg-green-500 text-lg font-bold text-white mb-5">
+                        Plazas/Desmalezamiento
                         <div class="absolute inset-0 h-full w-full scale-0 rounded-2xl transition-all duration-300 group-hover:scale-100 group-hover:bg-white/30"></div>
                     </button>
                 </a>
