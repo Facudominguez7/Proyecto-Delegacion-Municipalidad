@@ -33,21 +33,27 @@ if (!empty($_GET['pdf']) && $_GET['pdf'] === 'ReporteActividadPorDia') {
     <nav>
         <div class="flex bg-gray-800 text-white top-0 py-5 flex-wrap justify-around bg-silver">
             <div class="flex flex-col">
-                <a href="index.php" >
+                <a href="index.php">
                     <h1 class="text-xl text-center font-semibold">Delegación 32-33</h1>
                 </a>
+<<<<<<< HEAD
                 <ul class=" flex gap-[40px] text-m mt-2 hidden">
+=======
+                <!--
+                    <ul class="flex gap-[40px] text-m mt-2">
+>>>>>>> 6b3ed0411721588532ede1c810c6ddff799171ca
                     <li>
                         <a href="index.php?modulo=registro">
-                            <h1 class="text-lg font-semibold">Registrarse</h1>
+                            <h1 class="hidden text-lg font-semibold">Registrarse</h1>
                         </a>
                     </li>
                     <li>
                         <a href="index.php">
-                            <h1 class="text-lg font-semibold">Iniciar Sesión</h1>
+                            <h1 class="hidden text-lg font-semibold">Iniciar Sesión</h1>
                         </a>
                     </li>
                 </ul>
+                -->
             </div>
         </div>
     </nav>
@@ -75,7 +81,7 @@ if (!empty($_GET['pdf']) && $_GET['pdf'] === 'ReporteActividadPorDia') {
         ?>
             <div class="flex w-full items-center justify-center flex-col mt-10">
                 <div class="flex justify-center items-center mb-5">
-                    <img class="w-1/2 h-1/2 rounded-xl" src="imagenes/logo-delegacion.jpg" alt="logo delegacion chacra 3233">
+                    <img class="w-1/3 h-1/3 rounded-xl" src="imagenes/logo-delegacion.jpg" alt="logo delegacion chacra 3233">
                 </div>
                 <a href="index.php?modulo=chacras">
                     <button class="group relative h-12 w-96 overflow-hidden rounded-2xl bg-green-500 text-lg font-bold text-white mb-5">
@@ -101,6 +107,15 @@ if (!empty($_GET['pdf']) && $_GET['pdf'] === 'ReporteActividadPorDia') {
                         <div class="absolute inset-0 h-full w-full scale-0 rounded-2xl transition-all duration-300 group-hover:scale-100 group-hover:bg-white/30"></div>
                     </button>
                 </a>
+                <!--
+                <a href="index.php?modulo=tareas-apoyo">
+                    <button class="group relative h-12 w-96 overflow-hidden rounded-2xl bg-green-500 text-lg font-bold text-white mb-5">
+                        Tareas de Apoyo
+                        <div class="absolute inset-0 h-full w-full scale-0 rounded-2xl transition-all duration-300 group-hover:scale-100 group-hover:bg-white/30"></div>
+                    </button>
+                </a>
+                -->
+
             </div>
         <?php
         }
