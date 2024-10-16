@@ -4,30 +4,30 @@
 <header class="bg-gray-800 shadow">
     <div class="mx-auto max-w-7xl px-4 py-6 sm:px-3 lg:px-8">
         <h1 class="text-3xl font-bold tracking-tight flex justify-center text-white">
-            Control puntos limpios
+            Plazas / Desmalezamiento
         </h1>
         <br>
     </div>
 </header>
 <div class="flex justify-center flex-row mt-5 mb-2">
-    <a href="index.php?modulo=puntos">
+    <a href="index.php?modulo=des">
         <button class="middle none center mr-4 rounded-lg bg-gray-800 py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-gray-500/20 transition-all hover:shadow-lg hover:shadow-gray-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" data-ripple-light="true">
             Volver
         </button>
     </a>
-    <a href="index.php?modulo=agregar-tarea-punto&idPunto=<?php echo $_GET['idPunto'] ?>">
+    <a href="index.php?modulo=agregar-tarea-des&idDes=<?php echo $_GET['idDes'] ?>">
         <button class="middle none center mr-4 rounded-lg bg-gray-800 py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-gray-500/20 transition-all hover:shadow-lg hover:shadow-gray-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" data-ripple-light="true">
-            Agregar Tarea
+            Agregar Actividad
         </button>
     </a>
 </div>
 <div class="flex flex-col lg:flex-row lg:justify-evenly mt-5">
     <div class="w-full lg:w-1/2">
         <?php
-        $idPunto = $_GET['idPunto'];
-        $sqlMostrarPunto = "SELECT puntos.titulo AS nombre, ST_X(ubicacion) AS latitud, ST_Y(ubicacion) AS longitud   
-                FROM puntos
-                WHERE id = $idPunto";
+        $idDes = $_GET['idDes'];
+        $sqlMostrarPunto = "SELECT des.titulo AS nombre, ST_X(ubicacion) AS latitud, ST_Y(ubicacion) AS longitud   
+                FROM desmalezamientos des
+                WHERE id = $idDes";
         $datos = mysqli_query($con, $sqlMostrarPunto);
         if ($datos->num_rows > 0) {
             while ($fila = mysqli_fetch_array($datos)) {
@@ -81,10 +81,10 @@
             </thead>
             <tbody>
                 <?php
-                $idPunto = $_GET['idPunto'];
+                $idDes = $_GET['idDes'];
                 $sqlMostrarTarea = "SELECT t.id, t.titulo, t.fecha   
-                 FROM tareas_puntos AS t
-                 WHERE t.idPunto = $idPunto
+                 FROM tareas_des AS t
+                 WHERE t.idDes = $idDes
                  ORDER BY t.fecha DESC";
                 $datos = mysqli_query($con, $sqlMostrarTarea);
                 if ($datos->num_rows > 0) {
@@ -99,14 +99,14 @@
                             <?php echo date('d/m/Y', strtotime($fila['fecha'])); ?>
                         </td>
                         <td class="flex justify-center flex-col xl:flex-row w-full xl:w-auto p-3 text-gray-800 border border-b text-center xl:table-cell relative xl:static">
-                            <?php $idPunto = $_GET['idPunto'] ?>
-                            <a href="index.php?modulo=detalle-puntos&id=<?php echo $fila['id'] ?>&idPunto=<?php echo $idPunto?>" class="text-yellow-400 hover:text-yellow-600">
+                            <?php $idDes = $_GET['idDes'] ?>
+                            <a href="index.php?modulo=detalle-des&id=<?php echo $fila['id'] ?>&idDes=<?php echo $idDes?>" class="text-yellow-400 hover:text-yellow-600">
                                 <button class="mb-2 xl:mb-0 middle none center mr-4 rounded-lg bg-yellow-800 py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-yellow-500/20 transition-all hover:shadow-lg hover:shadow-yellow-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" data-ripple-light="true">
                                     Detalles
                                 </button>
                             </a>
-                            <?php $idPunto = $_GET['idPunto'] ?>
-                            <a href="index.php?modulo=eliminar&idPunto=<?php echo $idPunto; ?>&id=<?php echo $fila['id'] ?>&tipo=tareas-puntos" class="text-red-400 hover:text-red-600">
+                            <?php $idDes = $_GET['idDes'] ?>
+                            <a href="index.php?modulo=eliminar&idDes=<?php echo $idDes; ?>&id=<?php echo $fila['id'] ?>&tipo=tareas-des" class="text-red-400 hover:text-red-600">
                                 <button class="mb-2 xl:mb-0 middle none center mr-4 rounded-lg bg-red-800 py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-red-500/20 transition-all hover:shadow-lg hover:shadow-red-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" data-ripple-light="true">
                                     Eliminar
                                 </button>

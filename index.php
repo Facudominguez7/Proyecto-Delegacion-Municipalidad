@@ -36,12 +36,8 @@ if (!empty($_GET['pdf']) && $_GET['pdf'] === 'ReporteActividadPorDia') {
                 <a href="index.php">
                     <h1 class="text-xl text-center font-semibold">Delegación 32-33</h1>
                 </a>
-<<<<<<< HEAD
-                <ul class=" flex gap-[40px] text-m mt-2 hidden">
-=======
                 <!--
                     <ul class="flex gap-[40px] text-m mt-2">
->>>>>>> 6b3ed0411721588532ede1c810c6ddff799171ca
                     <li>
                         <a href="index.php?modulo=registro">
                             <h1 class="hidden text-lg font-semibold">Registrarse</h1>
@@ -64,6 +60,9 @@ if (!empty($_GET['pdf']) && $_GET['pdf'] === 'ReporteActividadPorDia') {
             </h1>
             <h1 class="text-lg sm:text-2xl lg:text-3xl font-bold tracking-tight text-white text-center">
                 Av. Gral. Lavalle 4637
+            </h1>
+            <h1 class="text-lg sm:text-2xl lg:text-3xl font-bold tracking-tight text-white text-center">
+            3764668218
             </h1>
         </div>
     </header>

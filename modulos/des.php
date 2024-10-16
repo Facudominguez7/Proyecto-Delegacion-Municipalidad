@@ -64,7 +64,7 @@
             <?php
             if (isset($_GET['buscar'])) {
                 $busqueda = $_GET['buscar'];
-                $sqlbusqueda = "SELECT *, chacras.nombre AS nombreChacra FROM desmalezamientos INNER JOIN chacras ON desmalezamientos.idChacra = chacras.id  WHERE chacras.nombre LIKE '$busqueda%' OR desmalezamientos.titulo LIKE '$busqueda%'";
+                $sqlbusqueda = "SELECT *, chacras.nombre AS nombreChacra FROM desmalezamientos INNER JOIN chacras ON desmalezamientos.idChacra = chacras.id  WHERE chacras.nombre LIKE '$busqueda%' OR desmalezamientos.titulo LIKE '%$busqueda%'";
                 $datosBusqueda = mysqli_query($con, $sqlbusqueda);
                 if ($datosBusqueda->num_rows > 0) {
                     while ($filabus = mysqli_fetch_array($datosBusqueda)) {
@@ -82,7 +82,7 @@
                                 <!--<span class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">Acciones</span>-->
                                 <a href="index.php?modulo=tareas-des&idDes=<?php echo $filabus['id'] ?>" class="text-yellow-400 hover:text-yellow-600 mt-2 lg:mt-0">
                                     <button class="middle none center mr-4 rounded-lg bg-yellow-800 py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-yellow-500/20 transition-all hover:shadow-lg hover:shadow-yellow-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" data-ripple-light="true">
-                                        Tareas
+                                        Actividades
                                     </button>
                                 </a>
                                 <a href="index.php?modulo=editar-des&idDes=<?php echo $filabus['id'] ?>" class="text-green-400 hover:text-green-600 mt-2 lg:mt-0">
@@ -122,7 +122,7 @@
                                 <!--<span class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">Acciones</span>-->
                                 <a href="index.php?modulo=tareas-des&idDes=<?php echo $fila['id'] ?>" class="text-yellow-400 hover:text-yellow-600 mt-2 lg:mt-0">
                                     <button class="middle none center mr-4 rounded-lg bg-yellow-800 py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-yellow-500/20 transition-all hover:shadow-lg hover:shadow-yellow-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" data-ripple-light="true">
-                                        Tareas
+                                        Actividades
                                     </button>
                                 </a>
                                 <a href="index.php?modulo=editar-des&idDes=<?php echo $fila['id'] ?>" class="text-green-400 hover:text-green-600 mt-2 lg:mt-0">

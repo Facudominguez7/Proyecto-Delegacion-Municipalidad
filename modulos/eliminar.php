@@ -210,6 +210,78 @@ if (isset($_GET['accion'])) {
             }
             mysqli_stmt_close($stmtEliminarDes);
             break;
+        case 'eliminar-tareas-des':
+            // Eliminar el tareas_des
+            $idDes = $_GET['idDes'];
+            $sqlEliminarTareasDes = "DELETE FROM tareas_des WHERE id = ?";
+            $stmtEliminarTareasDes = mysqli_prepare($con, $sqlEliminarTareasDes);
+            mysqli_stmt_bind_param($stmtEliminarTareasDes, "i", $id);
+            mysqli_stmt_execute($stmtEliminarTareasDes);
+
+            if (!mysqli_error($con)) {
+                echo '<script> 
+                Swal.fire({
+                    title: "¡Actividad eliminada con éxito!",
+                    icon: "success",
+                    confirmButtonColor: "#4caf50",
+                    confirmButtonText: "Aceptar",
+                    willClose: () => {
+                        window.location.href = "index.php?modulo=tareas-des&idDes='. $idDes .'";
+                    }
+                }); 
+            </script>';
+            } else {
+                echo '<script> 
+                Swal.fire({
+                    title: "¡Error al eliminar la Actividad!",
+                    text: "Ocurrió un error al intentar eliminar la Actividad: ' . mysqli_error($con) . '",
+                    icon: "error",
+                    confirmButtonColor: "#d33",
+                    confirmButtonText: "Aceptar",
+                    willClose: () => {
+                        window.location.href = "index.php?modulo=tareas-des&idDes='. $idDes .'";
+                    }
+                }); 
+            </script>';
+            }
+            mysqli_stmt_close($stmtEliminarTareasDes);
+            break;
+        case 'eliminar-tareas-puntos':
+            // Eliminar el tareas_puntos
+            $idPunto = $_GET['idPunto'];
+            $sqlEliminarTareasPuntos = "DELETE FROM tareas_puntos WHERE id = ?";
+            $stmtEliminarTareasPuntos = mysqli_prepare($con, $sqlEliminarTareasPuntos);
+            mysqli_stmt_bind_param($stmtEliminarTareasPuntos, "i", $id);
+            mysqli_stmt_execute($stmtEliminarTareasPuntos);
+
+            if (!mysqli_error($con)) {
+                echo '<script> 
+                Swal.fire({
+                    title: "¡Tarea eliminada con éxito!",
+                    icon: "success",
+                    confirmButtonColor: "#4caf50",
+                    confirmButtonText: "Aceptar",
+                    willClose: () => {
+                        window.location.href = "index.php?modulo=tareas-puntos&idPunto='. $idPunto .'";
+                    }
+                }); 
+            </script>';
+            } else {
+                echo '<script> 
+                Swal.fire({
+                    title: "¡Error al eliminar la tarea!",
+                    text: "Ocurrió un error al intentar eliminar la tarea: ' . mysqli_error($con) . '",
+                    icon: "error",
+                    confirmButtonColor: "#d33",
+                    confirmButtonText: "Aceptar",
+                    willClose: () => {
+                        window.location.href = "index.php?modulo=tareas-puntos&idPunto='. $idPunto .'";
+                    }
+                }); 
+            </script>';
+            }
+            mysqli_stmt_close($stmtEliminarTareasPuntos);
+            break;
     }
 }
 ?>
@@ -227,11 +299,13 @@ if (isset($_GET['accion'])) {
                 </div>
                 <div class="row">
                     <div class="col-sm-6">
-                        <?php if ($tipo === 'tareas' || $tipo === 'chacras' || $tipo === 'puntos' || $tipo === 'informes' || $tipo === 'des') {
-                            if (isset($_GET['idChacra'])) {
-                                $idChacra = $_GET['idChacra'];
+                        <?php if ($tipo === 'tareas' || $tipo === 'chacras' || $tipo === 'puntos' || $tipo === 'informes' || $tipo === 'des' || $tipo === 'tareas-des' || $tipo === 'tareas-puntos') {
+                            if (isset($_GET['idChacra']) || isset($_GET['idPunto']) || isset($_GET['idDes'])) {
+                                $idChacra = $_GET['idChacra'] ?? null;
+                                $idPunto = $_GET['idPunto'] ?? null;
+                                $idDes = $_GET['idDes'] ?? null;
                         ?>
-                                <form action="index.php?modulo=eliminar&tipo=<?php echo $tipo; ?>&accion=eliminar-<?php echo $tipo; ?>&id=<?php echo $id; ?>&idChacra=<?php echo $idChacra; ?>" method="POST">
+                                <form action="index.php?modulo=eliminar&tipo=<?php echo $tipo; ?>&accion=eliminar-<?php echo $tipo; ?>&id=<?php echo $id; ?>&idChacra=<?php echo $idChacra; ?>&idPunto=<?php echo $idPunto; ?>&idDes=<?php echo $idDes; ?>" method="POST">
                                 <?php
                             } else {
                                 ?>
@@ -242,10 +316,12 @@ if (isset($_GET['accion'])) {
                                     <input type="hidden" name="accion" value="eliminar_registro">
                                     <input type="hidden" name="id" value="<?php echo $id; ?>">
                                     <input type="submit" name="" value="Eliminar" class=" btn btn-danger">
-                                    <?php if (isset($_GET['idChacra'])) {
-                                        $idChacra = $_GET['idChacra'];
+                                    <?php if (isset($_GET['idChacra']) || isset($_GET['idPunto']) || isset($_GET['idDes'])) {
+                                        $idChacra = $_GET['idChacra'] ?? null;
+                                        $idPunto = $_GET['idPunto'] ?? null;
+                                        $idDes = $_GET['idDes'] ?? null;
                                     ?>
-                                        <a href="index.php?modulo=<?php echo $tipo; ?>&idChacra=<?php echo $idChacra; ?>" class="btn btn-success">Cancelar</a>
+                                        <a href="index.php?modulo=<?php echo $tipo; ?>&idChacra=<?php echo $idChacra; ?>&idPunto=<?php echo $idPunto; ?>&idDes=<?php echo $idDes; ?>" class="btn btn-success">Cancelar</a>
                                     <?php
                                     } else {
                                     ?>
