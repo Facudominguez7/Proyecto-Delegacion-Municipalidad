@@ -59,7 +59,7 @@ if (!empty($_GET['pdf']) && $_GET['pdf'] === 'ReporteActividadPorDia') {
                 delegación.municipal3233@gmail.com
             </h1>
             <h1 class="text-lg sm:text-2xl lg:text-3xl font-bold tracking-tight text-white text-center">
-                Av. Gral. Lavalle 4637
+                Av. Gral. Lavalle 4654
             </h1>
             <h1 class="text-lg sm:text-2xl lg:text-3xl font-bold tracking-tight text-white text-center">
             3764668218
