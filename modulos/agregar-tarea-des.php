@@ -6,16 +6,18 @@ if (!empty($_GET['accion'])) {
         $fecha = $_POST['fecha'];
         $descripcion = $_POST['descripcion'];
 
-        // Verificación de la tarea 
+        /* Verificación de la tarea 
         $sql_verificar = "SELECT * FROM tareas_des WHERE titulo = ?";
         $stmt_verificar = mysqli_prepare($con, $sql_verificar);
         mysqli_stmt_bind_param($stmt_verificar, "s", $titulo);
         mysqli_stmt_execute($stmt_verificar);
         mysqli_stmt_store_result($stmt_verificar);
+        */
 
-        if (mysqli_stmt_num_rows($stmt_verificar) != 0) {
+        /*if (mysqli_stmt_num_rows($stmt_verificar) != 0) {
             echo "<script> alert('ESTA ACTIVIDAD YA EXISTE EN LA BASE DE DATOS');</script>";
         } else {
+         */
             // Insertar datos en la tabla de tareas
             $sqlInsertTarea = "INSERT INTO tareas_des(titulo, fecha, descripcion, idDes) VALUES (?, ?, ?, ?)";
             $stmtTarea = mysqli_prepare($con, $sqlInsertTarea);
@@ -66,7 +68,7 @@ if (!empty($_GET['accion'])) {
             echo "<script>window.location='index.php?modulo=tareas-des&idDes=" . $idDes . "';</script>";
         }
     }
-}
+//}
 ?>
 
 <head>
