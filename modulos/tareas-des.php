@@ -15,11 +15,13 @@
             Volver
         </button>
     </a>
-    <a href="index.php?modulo=agregar-tarea-des&idDes=<?php echo $_GET['idDes'] ?>">
-        <button class="middle none center mr-4 rounded-lg bg-gray-800 py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-gray-500/20 transition-all hover:shadow-lg hover:shadow-gray-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" data-ripple-light="true">
-            Agregar Actividad
-        </button>
-    </a>
+    <?php if (isset($_SESSION['rol']) && $_SESSION['rol'] == 2) { ?>
+        <a href="index.php?modulo=agregar-tarea-des&idDes=<?php echo $_GET['idDes'] ?>">
+            <button class="middle none center mr-4 rounded-lg bg-gray-800 py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-gray-500/20 transition-all hover:shadow-lg hover:shadow-gray-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" data-ripple-light="true">
+                Agregar Actividad
+            </button>
+        </a>
+    <?php } ?>
 </div>
 <div class="flex flex-col lg:flex-row lg:justify-evenly mt-5">
     <div class="w-full lg:w-1/2">
@@ -100,17 +102,19 @@
                         </td>
                         <td class="flex justify-center flex-col xl:flex-row w-full xl:w-auto p-3 text-gray-800 border border-b text-center xl:table-cell relative xl:static">
                             <?php $idDes = $_GET['idDes'] ?>
-                            <a href="index.php?modulo=detalle-des&id=<?php echo $fila['id'] ?>&idDes=<?php echo $idDes?>" class="text-yellow-400 hover:text-yellow-600">
+                            <a href="index.php?modulo=detalle-des&id=<?php echo $fila['id'] ?>&idDes=<?php echo $idDes ?>" class="text-yellow-400 hover:text-yellow-600">
                                 <button class="mb-2 xl:mb-0 middle none center mr-4 rounded-lg bg-yellow-800 py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-yellow-500/20 transition-all hover:shadow-lg hover:shadow-yellow-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" data-ripple-light="true">
                                     Detalles
                                 </button>
                             </a>
-                            <?php $idDes = $_GET['idDes'] ?>
-                            <a href="index.php?modulo=eliminar&idDes=<?php echo $idDes; ?>&id=<?php echo $fila['id'] ?>&tipo=tareas-des" class="text-red-400 hover:text-red-600">
-                                <button class="mb-2 xl:mb-0 middle none center mr-4 rounded-lg bg-red-800 py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-red-500/20 transition-all hover:shadow-lg hover:shadow-red-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" data-ripple-light="true">
-                                    Eliminar
-                                </button>
-                            </a>
+                            <?php if (isset($_SESSION['rol']) && $_SESSION['rol'] == 2) { ?>
+                                <?php $idDes = $_GET['idDes'] ?>
+                                <a href="index.php?modulo=eliminar&idDes=<?php echo $idDes; ?>&id=<?php echo $fila['id'] ?>&tipo=tareas-des" class="text-red-400 hover:text-red-600">
+                                    <button class="mb-2 xl:mb-0 middle none center mr-4 rounded-lg bg-red-800 py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-red-500/20 transition-all hover:shadow-lg hover:shadow-red-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" data-ripple-light="true">
+                                        Eliminar
+                                    </button>
+                                </a>
+                            <?php } ?>
                         </td>
                         </tr>
                     <?php

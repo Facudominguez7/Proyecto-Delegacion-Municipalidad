@@ -1,4 +1,5 @@
 <?php
+session_start();
 include_once('includes/conexion.php');
 conectar();
 
@@ -28,7 +29,6 @@ if (!empty($_GET['pdf']) && $_GET['pdf'] === 'ReporteActividadPorDia') {
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
-
 <body class="bg-gray-200">
     <nav>
         <div class="flex bg-gray-800 text-white top-0 py-5 flex-wrap justify-around bg-silver">
@@ -36,20 +36,26 @@ if (!empty($_GET['pdf']) && $_GET['pdf'] === 'ReporteActividadPorDia') {
                 <a href="index.php">
                     <h1 class="text-xl text-center font-semibold">Delegación 32-33</h1>
                 </a>
-                <!--
-                    <ul class="flex gap-[40px] text-m mt-2">
-                    <li>
-                        <a href="index.php?modulo=registro">
-                            <h1 class="hidden text-lg font-semibold">Registrarse</h1>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="index.php">
-                            <h1 class="hidden text-lg font-semibold">Iniciar Sesión</h1>
-                        </a>
-                    </li>
+                <ul class="flex gap-[40px] text-m mt-2">
+                    <?php if (isset($_SESSION['nombre_usuario'])): ?>
+                        <li>
+                            <a href="index.php?modulo=iniciar-sesion&salir">
+                                <h1 class="text-lg font-semibold">Cerrar Sesión</h1>
+                            </a>
+                        </li>
+                    <?php else: ?>
+                        <li>
+                            <a href="index.php?modulo=registro">
+                                <h1 class="text-lg font-semibold">Registrarse</h1>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="index.php?modulo=iniciar-sesion">
+                                <h1 class="text-lg font-semibold">Iniciar Sesión</h1>
+                            </a>
+                        </li>
+                    <?php endif; ?>
                 </ul>
-                -->
             </div>
         </div>
     </nav>
@@ -66,7 +72,6 @@ if (!empty($_GET['pdf']) && $_GET['pdf'] === 'ReporteActividadPorDia') {
             </h1>
         </div>
     </header>
-
 
     <main>
         <?php

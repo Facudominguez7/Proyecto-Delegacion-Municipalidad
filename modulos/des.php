@@ -8,7 +8,7 @@
 <header class="bg-gray-800 shadow">
     <div class="mx-auto max-w-7xl px-4 py-6 sm:px-3 lg:px-8">
         <h1 class="text-3xl font-bold tracking-tight flex justify-center text-white">
-        Plazas / Desmalezamiento
+            Plazas / Desmalezamiento
         </h1>
         <br>
     </div>
@@ -45,12 +45,20 @@
     </div>
 </form>
 <div class="flex justify-center mt-10 mb-0">
-    <a href="index.php?modulo=agregar-des">
-        <button class="middle none center mr-4 rounded-lg bg-gray-800 py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-gray-500/20 transition-all hover:shadow-lg hover:shadow-gray-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" data-ripple-light="true">
-            Agregar Tarea
+    <a href="index.php">
+        <button class="md:mb-0 mb-5  middle none center mr-4 rounded-lg bg-gray-800 py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-gray-500/20 transition-all hover:shadow-lg hover:shadow-gray-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" data-ripple-light="true">
+            Volver
         </button>
     </a>
+    <?php if (isset($_SESSION['rol']) && $_SESSION['rol'] == 2) { ?>
+        <a href="index.php?modulo=agregar-des">
+            <button class="middle none center mr-4 rounded-lg bg-gray-800 py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-gray-500/20 transition-all hover:shadow-lg hover:shadow-gray-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" data-ripple-light="true">
+                Agregar Tarea
+            </button>
+        </a>
+    <?php } ?>
 </div>
+
 <section class="mx-auto w-full max-w-full flex justify-center items-stretch pb-4 px-4 sm:px-6 lg:px-8">
     <table class="border-collapse w-full mt-10">
         <thead>
@@ -85,16 +93,18 @@
                                         Actividades
                                     </button>
                                 </a>
-                                <a href="index.php?modulo=editar-des&idDes=<?php echo $filabus['id'] ?>" class="text-green-400 hover:text-green-600 mt-2 lg:mt-0">
-                                    <button class="middle none center mr-4 rounded-lg bg-green-800 py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-green-500/20 transition-all hover:shadow-lg hover:shadow-green-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" data-ripple-light="true">
-                                        Editar
-                                    </button>
-                                </a>
-                                <a href="index.php?modulo=eliminar&id=<?php echo $filabus['id'] ?>&tipo=des" class="text-red-400 hover:text-red-600 mt-2 lg:mt-0">
-                                    <button class="middle none center mr-4 rounded-lg bg-red-800 py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-red-500/20 transition-all hover:shadow-lg hover:shadow-red-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" data-ripple-light="true">
-                                        Eliminar
-                                    </button>
-                                </a>
+                                <?php if (isset($_SESSION['rol']) && $_SESSION['rol'] == 2) { ?>
+                                    <a href="index.php?modulo=editar-des&idDes=<?php echo $filabus['id'] ?>" class="text-green-400 hover:text-green-600 mt-2 lg:mt-0">
+                                        <button class="middle none center mr-4 rounded-lg bg-green-800 py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-green-500/20 transition-all hover:shadow-lg hover:shadow-green-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" data-ripple-light="true">
+                                            Editar
+                                        </button>
+                                    </a>
+                                    <a href="index.php?modulo=eliminar&id=<?php echo $filabus['id'] ?>&tipo=des" class="text-red-400 hover:text-red-600 mt-2 lg:mt-0">
+                                        <button class="middle none center mr-4 rounded-lg bg-red-800 py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-red-500/20 transition-all hover:shadow-lg hover:shadow-red-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" data-ripple-light="true">
+                                            Eliminar
+                                        </button>
+                                    </a>
+                                <?php } ?>
                             </td>
                         </tr>
                     <?php
@@ -125,6 +135,7 @@
                                         Actividades
                                     </button>
                                 </a>
+                                <?php if (isset($_SESSION['rol']) && $_SESSION['rol'] == 2) { ?>
                                 <a href="index.php?modulo=editar-des&idDes=<?php echo $fila['id'] ?>" class="text-green-400 hover:text-green-600 mt-2 lg:mt-0">
                                     <button class="middle none center mr-4 rounded-lg bg-green-800 py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-green-500/20 transition-all hover:shadow-lg hover:shadow-green-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" data-ripple-light="true">
                                         Editar
@@ -135,6 +146,7 @@
                                         Eliminar
                                     </button>
                                 </a>
+                                <?php } ?>
                             </td>
                         </tr>
             <?php

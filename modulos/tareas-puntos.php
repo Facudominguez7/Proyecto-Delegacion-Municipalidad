@@ -15,11 +15,13 @@
             Volver
         </button>
     </a>
+    <?php if (isset($_SESSION['rol']) && $_SESSION['rol'] == 2) { ?>
     <a href="index.php?modulo=agregar-tarea-punto&idPunto=<?php echo $_GET['idPunto'] ?>">
         <button class="middle none center mr-4 rounded-lg bg-gray-800 py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-gray-500/20 transition-all hover:shadow-lg hover:shadow-gray-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" data-ripple-light="true">
             Agregar Tarea
         </button>
     </a>
+    <?php } ?>
 </div>
 <div class="flex flex-col lg:flex-row lg:justify-evenly mt-5">
     <div class="w-full lg:w-1/2">
@@ -105,12 +107,14 @@
                                     Detalles
                                 </button>
                             </a>
+                            <?php if (isset($_SESSION['rol']) && $_SESSION['rol'] == 2) { ?>
                             <?php $idPunto = $_GET['idPunto'] ?>
                             <a href="index.php?modulo=eliminar&idPunto=<?php echo $idPunto; ?>&id=<?php echo $fila['id'] ?>&tipo=tareas-puntos" class="text-red-400 hover:text-red-600">
                                 <button class="mb-2 xl:mb-0 middle none center mr-4 rounded-lg bg-red-800 py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-red-500/20 transition-all hover:shadow-lg hover:shadow-red-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" data-ripple-light="true">
                                     Eliminar
                                 </button>
                             </a>
+                            <?php } ?>
                         </td>
                         </tr>
                     <?php

@@ -40,11 +40,18 @@
 </form>
 
 <div class="flex justify-center flex-col items-center lg:flex-row lg:justify-evenly mt-10 mb-0">
+    <a href="index.php">
+        <button class="md:mb-0 mb-5  middle none center mr-4 rounded-lg bg-gray-800 py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-gray-500/20 transition-all hover:shadow-lg hover:shadow-gray-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" data-ripple-light="true">
+            Volver
+        </button>
+    </a>
+    <?php if (isset($_SESSION['rol']) && $_SESSION['rol'] == 2) { ?>
     <a href="index.php?modulo=agregar-informe-diario" class="mb-4 lg:mb-0 lg:mr-4">
         <button class="rounded-lg bg-gray-800 py-3 px-6 font-sans text-xs lg:text-sm font-bold uppercase text-white shadow-md shadow-gray-500/20 transition-all hover:shadow-lg hover:shadow-gray-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" data-ripple-light="true">
             Agregar Informe
         </button>
     </a>
+    <?php } ?>
 </div>
 
 
@@ -82,11 +89,13 @@
                                         Detalles
                                     </button>
                                 </a>
-                                <a href="index.php?modulo=eliminar&id=<?php echo $filabus['id'] ?>&tipo=informes" class="text-red-400 hover:text-red-600">
-                                    <button class="mb-2 xl:mb-0 middle none center mr-4 rounded-lg bg-red-800 py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-red-500/20 transition-all hover:shadow-lg hover:shadow-red-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" data-ripple-light="true">
-                                        Eliminar
-                                    </button>
-                                </a>
+                                <?php if (isset($_SESSION['rol']) && $_SESSION['rol'] == 2) { ?>
+                                    <a href="index.php?modulo=eliminar&id=<?php echo $filabus['id'] ?>&tipo=informes" class="text-red-400 hover:text-red-600">
+                                        <button class="mb-2 xl:mb-0 middle none center mr-4 rounded-lg bg-red-800 py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-red-500/20 transition-all hover:shadow-lg hover:shadow-red-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" data-ripple-light="true">
+                                            Eliminar
+                                        </button>
+                                    </a>
+                                <?php } ?>
                             </td>
                         </tr>
                     <?php
@@ -100,7 +109,7 @@
                 if ($datos->num_rows > 0) {
                     while ($fila = mysqli_fetch_array($datos)) {
                     ?>
-                       <tr class="bg-white lg:hover:bg-gray-100 flex lg:table-row flex-row lg:flex-row flex-wrap lg:flex-no-wrap mb-10 lg:mb-0">
+                        <tr class="bg-white lg:hover:bg-gray-100 flex lg:table-row flex-row lg:flex-row flex-wrap lg:flex-no-wrap mb-10 lg:mb-0">
                             <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">
                                 <span class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">Título</span>
                                 <?php echo $fila['titulo'] ?>
@@ -116,11 +125,13 @@
                                         Detalles
                                     </button>
                                 </a>
-                                <a href="index.php?modulo=eliminar&id=<?php echo $fila['id'] ?>&tipo=informes" class="text-red-400 hover:text-red-600">
-                                    <button class="mb-2 xl:mb-0 middle none center mr-4 rounded-lg bg-red-800 py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-red-500/20 transition-all hover:shadow-lg hover:shadow-red-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" data-ripple-light="true">
-                                        Eliminar
-                                    </button>
-                                </a>
+                                <?php if (isset($_SESSION['rol']) && $_SESSION['rol'] == 2) { ?>
+                                    <a href="index.php?modulo=eliminar&id=<?php echo $fila['id'] ?>&tipo=informes" class="text-red-400 hover:text-red-600">
+                                        <button class="mb-2 xl:mb-0 middle none center mr-4 rounded-lg bg-red-800 py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-red-500/20 transition-all hover:shadow-lg hover:shadow-red-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" data-ripple-light="true">
+                                            Eliminar
+                                        </button>
+                                    </a>
+                                <?php } ?>
                             </td>
                         </tr>
             <?php
