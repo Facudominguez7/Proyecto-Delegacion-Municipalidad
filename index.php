@@ -105,12 +105,14 @@ if (!empty($_GET['pdf']) && $_GET['pdf'] === 'ReporteActividadPorDia') {
                         <div class="absolute inset-0 h-full w-full scale-0 rounded-2xl transition-all duration-300 group-hover:scale-100 group-hover:bg-white/30"></div>
                     </button>
                 </a>
+                <?php if (isset($_SESSION['rol']) && $_SESSION['rol'] == 2) { ?>
                 <a href="index.php?modulo=informe-diario">
                     <button class="group relative h-12 w-96 overflow-hidden rounded-2xl bg-green-500 text-lg font-bold text-white mb-5">
                         Informe Diario
                         <div class="absolute inset-0 h-full w-full scale-0 rounded-2xl transition-all duration-300 group-hover:scale-100 group-hover:bg-white/30"></div>
                     </button>
                 </a>
+                <?php } ?>
                 <!--
                 <a href="index.php?modulo=tareas-apoyo">
                     <button class="group relative h-12 w-96 overflow-hidden rounded-2xl bg-green-500 text-lg font-bold text-white mb-5">
