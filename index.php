@@ -68,7 +68,7 @@ if (!empty($_GET['pdf']) && $_GET['pdf'] === 'ReporteActividadPorDia') {
                 Av. Gral. Lavalle 4654
             </h1>
             <h1 class="text-lg sm:text-2xl lg:text-3xl font-bold tracking-tight text-white text-center">
-            3764668218
+            3764 669218
             </h1>
         </div>
     </header>
