@@ -7,10 +7,11 @@ if (isset($_GET['accion'])) {
         $telefono = $_POST['telefono'];
         $latitud = $_POST['latitud'];
         $longitud = $_POST['longitud'];
+        $descripcion = $_POST['descripcion'];
 
-        $sqlEditarChacra = "UPDATE chacras SET nombre=?, presidente=?, numPresidente=?, ubicacion=POINT(?, ?) WHERE id=?";
+        $sqlEditarChacra = "UPDATE chacras SET nombre=?, presidente=?, numPresidente=?, ubicacion=POINT(?, ?), descripcion=? WHERE id=?";
         $stmt = mysqli_prepare($con, $sqlEditarChacra);
-        mysqli_stmt_bind_param($stmt, "ssiddi", $nombre, $presidente, $telefono, $latitud, $longitud, $idChacra);
+        mysqli_stmt_bind_param($stmt, "ssiddsi", $nombre, $presidente, $telefono, $latitud, $longitud, $descripcion, $idChacra);
         mysqli_stmt_execute($stmt);
 
         // Verificar si se produjeron errores
@@ -47,7 +48,7 @@ if (isset($_GET['accion'])) {
         <div class="mx-auto w-full max-w-[550px]">
             <?php
             $idChacra = $_GET['idChacra'];
-            $sql = "SELECT id, nombre, presidente, numPresidente, ST_X(ubicacion) as latitud, ST_Y(ubicacion) as longitud From chacras WHERE chacras.id = $idChacra";
+            $sql = "SELECT id, nombre, presidente,descripcion, numPresidente, ST_X(ubicacion) as latitud, ST_Y(ubicacion) as longitud From chacras WHERE chacras.id = $idChacra";
             $sql = mysqli_query($con, $sql);
             if (mysqli_num_rows($sql) != 0) {
                 $r = mysqli_fetch_array($sql);
@@ -118,9 +119,13 @@ if (isset($_GET['accion'])) {
                             });
                         });
                     </script>
-                    <input type="text" name="latitud" id="latitud" placeholder="Ej. 40.7128" value="<?php echo $r['latitud']?>" class="hidden w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" required readonly />
-                    <input type="text" name="longitud" id="longitud" placeholder="Ej. -74.0060"  value="<?php echo $r['longitud']?>"  class="hidden w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" required readonly />
+                    <input type="text" name="latitud" id="latitud" placeholder="Ej. 40.7128" value="<?php echo $r['latitud'] ?>" class="hidden w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" required readonly />
+                    <input type="text" name="longitud" id="longitud" placeholder="Ej. -74.0060" value="<?php echo $r['longitud'] ?>" class="hidden w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" required readonly />
                     <input type="number" name="id" id="idChacra" value="<?php echo $r['id'] ?>" class="hidden w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
+                </div>
+                <div class="mb-5">
+                    <label for="descripcion" class="mb-3 block text-base font-medium text-[#07074D]">Descripción:</label>
+                    <textarea id="descripcion" name="descripcion" class="w-full resize-none rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"><?php echo $r['descripcion']; ?></textarea>
                 </div>
                 <div>
                     <button type="submit" class="hover:shadow-form rounded-md bg-[#6A64F1] py-3 px-8 text-base font-semibold text-white outline-none">
