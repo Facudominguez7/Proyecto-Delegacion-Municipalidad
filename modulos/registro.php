@@ -55,7 +55,7 @@
 <div class="w-full mt-10 mb-10 flex items-center justify-center">
     <div class="max-w-md w-4/5 md:w-full p-6 bg-white rounded-lg shadow-lg">
       <div class="flex justify-center mb-8">
-        <img src="Imagenes/logo-delegacion.jpg" alt="Logo-Delegación" class="w-44 h-48 md:w-56 md:h-56 rounded-lg">
+        <img src="Imagenes/logo-delegacion.png" alt="Logo-Delegación" class="w-full sm:w-1/2 rounded-lg">
       </div>
       <h1 class="text-2xl font-semibold text-center text-gray-500 mt-8 mb-6">Registro</h1>
       <form action="index.php?modulo=registro" method="post">
@@ -75,7 +75,7 @@
           <label for="password" class="block mb-2 text-sm text-gray-600">Contraseña</label>
           <input type="password" id="password" name="password" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500" required>
         </div>
-        <button type="submit" class="w-32 bg-gradient-to-r from-cyan-400 to-cyan-600 text-white py-2 rounded-lg mx-auto block focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500 mb-2">Registro</button>
+        <button type="submit" class="w-32 bg-gradient-to-r from-cyan-400 to-cyan-600 text-white py-2 rounded-lg mx-auto block focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500 mb-2">Registrarse</button>
       </form>
       <div class="text-center">
         <p class="text-sm">¿Ya tienes una cuenta? <a href="index.php?modulo=iniciar-sesion" class="text-cyan-600">Inicia sesión</a></p>

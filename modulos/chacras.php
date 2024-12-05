@@ -1,19 +1,17 @@
-<header class="bg-gray-800 shadow">
+<div class="bg-gray-800 shadow mt-0 w-full">
     <div class="mx-auto max-w-7xl px-4 py-6 sm:px-3 lg:px-8">
         <h1 class="text-3xl font-bold tracking-tight flex justify-center text-white">
             Tabla de Chacras
         </h1>
         <br />
     </div>
-</header>
+</div>
 
 <form action="index.php" method="GET">
     <input type="hidden" name="modulo" value="chacras">
     <input type="hidden" name="accion" value="buscar">
-    <div class="flex items-center w-1/2 mx-auto bg-white rounded-lg mt-5 " x-data="{ search: '' }">
-        <div class="w-full">
-            <input type="search" class="w-full px-4 py-1 text-gray-800 rounded-full focus:outline-none" placeholder="Buscar" x-model="search" name="buscar">
-        </div>
+    <div class="flex items-center w-full sm:w-1/2 mx-auto bg-white rounded-lg mt-5 shadow-lg" x-data="{ search: '' }">
+        <input type="search" class="w-full px-4 py-2 text-gray-800 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Buscar" x-model="search" name="buscar">
         <div class="flex flex-row gap-2 ">
             <?php if (isset($_GET['buscar'])) {
             ?>
@@ -94,17 +92,19 @@
                                         Tareas
                                     </button>
                                 </a>
-                                <?php if (isset($_SESSION['rol']) && $_SESSION['rol'] == 2) { ?>
+                                <?php if (isset($_SESSION['rol']) && ($_SESSION['rol'] == 2 || $_SESSION['rol'] == 3)) { ?>
                                     <a href="index.php?modulo=editar-chacra&idChacra=<?php echo $filabus['id'] ?>" class="text-green-400 hover:text-green-600 mt-2 lg:mt-0">
                                         <button class="middle none center mr-4 rounded-lg bg-green-800 py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-green-500/20 transition-all hover:shadow-lg hover:shadow-green-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" data-ripple-light="true">
                                             Editar
                                         </button>
                                     </a>
-                                    <a href="index.php?modulo=eliminar&id=<?php echo $filabus['id'] ?>&tipo=chacras" class="text-red-400 hover:text-red-600 mt-2 lg:mt-0">
-                                        <button class="middle none center mr-4 rounded-lg bg-red-800 py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-red-500/20 transition-all hover:shadow-lg hover:shadow-red-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" data-ripple-light="true">
-                                            Eliminar
-                                        </button>
-                                    </a>
+                                    <?php if ($_SESSION['rol'] == 2) { ?>
+                                        <a href="index.php?modulo=eliminar&id=<?php echo $filabus['id'] ?>&tipo=chacras" class="text-red-400 hover:text-red-600 mt-2 lg:mt-0">
+                                            <button class="middle none center mr-4 rounded-lg bg-red-800 py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-red-500/20 transition-all hover:shadow-lg hover:shadow-red-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" data-ripple-light="true">
+                                                Eliminar
+                                            </button>
+                                        </a>
+                                    <?php } ?>
                                 <?php } ?>
                             </td>
                         </tr>
@@ -135,17 +135,19 @@
                                         Tareas
                                     </button>
                                 </a>
-                                <?php if (isset($_SESSION['rol']) && $_SESSION['rol'] == 2) { ?>
+                                <?php if (isset($_SESSION['rol']) && ($_SESSION['rol'] == 2 || $_SESSION['rol'] == 3)) { ?>
                                     <a href="index.php?modulo=editar-chacra&idChacra=<?php echo $fila['id'] ?>" class="text-green-400 hover:text-green-600 mt-2 lg:mt-0">
                                         <button class="middle none center mr-4 rounded-lg bg-green-800 py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-green-500/20 transition-all hover:shadow-lg hover:shadow-green-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" data-ripple-light="true">
                                             Editar
                                         </button>
                                     </a>
-                                    <a href="index.php?modulo=eliminar&id=<?php echo $fila['id'] ?>&tipo=chacras" class="text-red-400 hover:text-red-600 mt-2 lg:mt-0">
-                                        <button class="middle none center mr-4 rounded-lg bg-red-800 py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-red-500/20 transition-all hover:shadow-lg hover:shadow-red-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" data-ripple-light="true">
-                                            Eliminar
-                                        </button>
-                                    </a>
+                                    <?php if ($_SESSION['rol'] == 2) { ?>
+                                        <a href="index.php?modulo=eliminar&id=<?php echo $fila['id'] ?>&tipo=chacras" class="text-red-400 hover:text-red-600 mt-2 lg:mt-0">
+                                            <button class="middle none center mr-4 rounded-lg bg-red-800 py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-red-500/20 transition-all hover:shadow-lg hover:shadow-red-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" data-ripple-light="true">
+                                                Eliminar
+                                            </button>
+                                        </a>
+                                    <?php } ?>
                                 <?php } ?>
                             </td>
                         </tr>

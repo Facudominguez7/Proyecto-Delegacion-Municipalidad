@@ -5,9 +5,8 @@ conectar();
 
 // Verificar si se está solicitando la generación del PDF
 if (!empty($_GET['pdf']) && $_GET['pdf'] === 'ReporteActividadPorDia') {
-    // Incluir el archivo necesario para la generación del PDF
     require('./fpdf/ReporteActividadPorDia.php');
-    exit; // Terminar la ejecución del script después de generar el PDF
+    exit;
 } else if (!empty($_GET['pdf']) && $_GET['pdf'] === 'ReporteActividadUnica') {
     require('./fpdf/ReporteActividadUnica.php');
     exit;
@@ -15,7 +14,6 @@ if (!empty($_GET['pdf']) && $_GET['pdf'] === 'ReporteActividadPorDia') {
     require('./fpdf/ReporteInformeUnico.php');
     exit;
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -29,105 +27,82 @@ if (!empty($_GET['pdf']) && $_GET['pdf'] === 'ReporteActividadPorDia') {
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
-<body class="bg-gray-200">
-    <nav>
-        <div class="flex bg-gray-800 text-white top-0 py-5 flex-wrap justify-around bg-silver">
-            <div class="flex flex-col">
-                <a href="index.php">
-                    <h1 class="text-xl text-center font-semibold">Delegación 32-33</h1>
-                </a>
-                <ul class="flex gap-[40px] text-m mt-2">
-                    <?php if (isset($_SESSION['nombre_usuario'])): ?>
-                        <li>
-                            <a href="index.php?modulo=iniciar-sesion&salir">
-                                <h1 class="text-lg font-semibold">Cerrar Sesión</h1>
-                            </a>
-                        </li>
-                    <?php else: ?>
-                        <li>
-                            <a href="index.php?modulo=registro">
-                                <h1 class="text-lg font-semibold">Registrarse</h1>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="index.php?modulo=iniciar-sesion">
-                                <h1 class="text-lg font-semibold">Iniciar Sesión</h1>
-                            </a>
-                        </li>
-                    <?php endif; ?>
-                </ul>
-            </div>
+<body class="bg-gray-50 text-gray-800">
+    <!-- Navegación -->
+    <nav class="bg-gray-800 text-white shadow-lg">
+        <div class="container mx-auto flex justify-between items-center py-4 px-6">
+            <a href="index.php" class="text-2xl font-bold hover:text-green-400 transition">Delegación 32-33</a>
+            <ul class="flex space-x-6">
+                <?php if (isset($_SESSION['nombre_usuario'])): ?>
+                    <li>
+                        <a href="index.php?modulo=iniciar-sesion&salir" class="hover:text-green-400 transition text-lg">
+                            Cerrar Sesión
+                        </a>
+                    </li>
+                <?php else: ?>
+                    <li>
+                        <a href="index.php?modulo=iniciar-sesion" class="hover:text-green-400 transition text-lg">
+                            Iniciar Sesión
+                        </a>
+                    </li>
+                <?php endif; ?>
+            </ul>
         </div>
     </nav>
-    <header class="bg-gray-800 shadow">
-        <div class="mx-auto max-w-7xl px-4 py-6 sm:px-3 lg:px-8">
-            <h1 class="text-xl sm:text-2xl lg:text-3xl font-bold tracking-tight text-white text-center mb-2">
-                delegación.municipal3233@gmail.com
-            </h1>
-            <h1 class="text-lg sm:text-2xl lg:text-3xl font-bold tracking-tight text-white text-center">
-                Av. Gral. Lavalle 4654
-            </h1>
-            <h1 class="text-lg sm:text-2xl lg:text-3xl font-bold tracking-tight text-white text-center">
-            3764668218
-            </h1>
+
+    <!-- Encabezado -->
+    <header class="bg-gray-700 text-white text-center py-8 shadow">
+        <div class="container mx-auto">
+            <h1 class="text-xl sm:text-4xl font-bold mb-2">delegación.municipal3233@gmail.com</h1>
+            <p class="text-lg sm:text-xl">Av. Gral. Lavalle 4654</p>
+            <p class="text-lg sm:text-xl">Teléfono: 3764668218</p>
         </div>
     </header>
 
-    <main>
+    <!-- Contenido Principal -->
+    <main class="container mx-auto py-2 px-2 sm:px-4">
         <?php
         if (!empty($_GET['modulo'])) {
             $modulo = $_GET['modulo'];
             include('./modulos/' . $modulo . '.php');
-        } elseif (!empty($_GET['pdf'])) {
-            $pdf = $_GET['pdf'];
-            include('./fpdf/' . $pdf . '.php');
         } else {
         ?>
-            <div class="flex w-full items-center justify-center flex-col mt-10">
-                <div class="flex justify-center items-center mb-5">
-                    <img class="w-1/3 h-1/3 rounded-xl" src="imagenes/logo-delegacion.jpg" alt="logo delegacion chacra 3233">
-                </div>
-                <a href="index.php?modulo=chacras">
-                    <button class="group relative h-12 w-96 overflow-hidden rounded-2xl bg-green-500 text-lg font-bold text-white mb-5">
-                        Chacras
-                        <div class="absolute inset-0 h-full w-full scale-0 rounded-2xl transition-all duration-300 group-hover:scale-100 group-hover:bg-white/30"></div>
-                    </button>
-                </a>
-                <a href="index.php?modulo=des">
-                    <button class="group relative h-12 w-96 overflow-hidden rounded-2xl bg-green-500 text-lg font-bold text-white mb-5">
-                        Plazas/Desmalezamiento
-                        <div class="absolute inset-0 h-full w-full scale-0 rounded-2xl transition-all duration-300 group-hover:scale-100 group-hover:bg-white/30"></div>
-                    </button>
-                </a>
-                <a href="index.php?modulo=puntos">
-                    <button class="group relative h-12 w-96 overflow-hidden rounded-2xl bg-green-500 text-lg font-bold text-white mb-5">
-                        Control Mini Basurales
-                        <div class="absolute inset-0 h-full w-full scale-0 rounded-2xl transition-all duration-300 group-hover:scale-100 group-hover:bg-white/30"></div>
-                    </button>
-                </a>
-                <?php if (isset($_SESSION['rol']) && $_SESSION['rol'] == 2) { ?>
-                <a href="index.php?modulo=informe-diario">
-                    <button class="group relative h-12 w-96 overflow-hidden rounded-2xl bg-green-500 text-lg font-bold text-white mb-5">
-                        Informe Diario
-                        <div class="absolute inset-0 h-full w-full scale-0 rounded-2xl transition-all duration-300 group-hover:scale-100 group-hover:bg-white/30"></div>
-                    </button>
-                </a>
-                <?php } ?>
-                <!--
-                <a href="index.php?modulo=tareas-apoyo">
-                    <button class="group relative h-12 w-96 overflow-hidden rounded-2xl bg-green-500 text-lg font-bold text-white mb-5">
-                        Tareas de Apoyo
-                        <div class="absolute inset-0 h-full w-full scale-0 rounded-2xl transition-all duration-300 group-hover:scale-100 group-hover:bg-white/30"></div>
-                    </button>
-                </a>
-                -->
+            <div class="flex flex-col items-center space-y-6 mb-5">
+                <img src="imagenes/logo-delegacion.png" alt="Logo Delegación Chacra 3233" class="w-full sm:w-1/3 rounded-xl shadow-lg mb-6">
 
+                <!-- Botones -->
+                <a href="index.php?modulo=chacras" class="w-full max-w-md">
+                    <button class="w-full h-12 rounded-lg bg-green-600 text-lg font-bold text-white transition hover:bg-green-700 shadow-md">
+                        Chacras
+                    </button>
+                </a>
+                <a href="index.php?modulo=des" class="w-full max-w-md">
+                    <button class="w-full h-12 rounded-lg bg-green-600 text-lg font-bold text-white transition hover:bg-green-700 shadow-md">
+                        Plazas / Desmalezamiento
+                    </button>
+                </a>
+                <a href="index.php?modulo=puntos" class="w-full max-w-md">
+                    <button class="w-full h-12 rounded-lg bg-green-600 text-lg font-bold text-white transition hover:bg-green-700 shadow-md">
+                        Control Mini Basurales
+                    </button>
+                </a>
+                <?php if (isset($_SESSION['rol']) && $_SESSION['rol'] == 2): ?>
+                    <a href="index.php?modulo=informe-diario" class="w-full max-w-md">
+                        <button class="w-full h-12 rounded-lg bg-green-600 text-lg font-bold text-white transition hover:bg-green-700 shadow-md">
+                            Informe Diario
+                        </button>
+                    </a>
+                <?php endif; ?>
             </div>
         <?php
         }
         ?>
     </main>
 
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white text-center py-4 mt-auto">
+        <p class="text-sm">&copy; 2024 Delegación 32-33. Todos los derechos reservados.</p>
+    </footer>
 </body>
 
 </html>
