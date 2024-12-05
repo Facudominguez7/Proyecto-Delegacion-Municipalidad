@@ -55,7 +55,7 @@
 <div class="w-full mt-10 mb-10 flex items-center justify-center">
     <div class="max-w-md w-4/5 md:w-full p-6 bg-white rounded-lg shadow-lg">
       <div class="flex justify-center mb-8">
-        <img src="Imagenes/logo-delegacion.png" alt="Logo-Delegación" class="w-full sm:w-1/2 rounded-lg">
+        <img src="imagenes/logo-delegacion.png" alt="Logo-Delegación" class="w-full sm:w-1/2 rounded-lg">
       </div>
       <h1 class="text-2xl font-semibold text-center text-gray-500 mt-8 mb-6">Registro</h1>
       <form action="index.php?modulo=registro" method="post">
