@@ -12,15 +12,15 @@
         if ($datos->num_rows > 0) {
             while ($fila = mysqli_fetch_array($datos)) {
         ?>
-                <h1 class="text-3xl font-bold tracking-tight flex justify-center text-white">
+                <h1 class="text-xl sm:text-4xl font-bold tracking-tight flex justify-center text-white">
                     Actividad <?php echo $fila['nombre'] ?>
                 </h1>
                 <br>
-                <p class="text-3xl tracking-tight flex justify-center text-white">
+                <p class="text-lg sm:text-xl tracking-tight flex justify-center text-white">
                     Comisión: Pres. <?php echo $fila['presidente'] ?>
                 </p>
                 <br>
-                <p class="text-3xl tracking-tight flex justify-center text-white">
+                <p class="text-lg sm:text-xl tracking-tight flex justify-center text-white">
                     Número de Teléfono: <?php echo $fila['numPresidente'] ?>
                 </p>
                 <br>
