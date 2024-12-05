@@ -22,7 +22,7 @@ if (!empty($_GET['pdf']) && $_GET['pdf'] === 'ReporteActividadPorDia') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="estilos/output.css">
-    <link rel="shortcut icon" type="image/jpg" href="Imagenes/logo-delegacion.jpg">
+    <link rel="shortcut icon" type="image/jpg" href="imagenes/logo-delegacion.jpg">
     <title>Plataforma Digital</title>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
