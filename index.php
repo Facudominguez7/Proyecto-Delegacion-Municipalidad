@@ -86,7 +86,7 @@ if (!empty($_GET['pdf']) && $_GET['pdf'] === 'ReporteActividadPorDia') {
                         Control Mini Basurales
                     </button>
                 </a>
-                <?php if (isset($_SESSION['rol']) && $_SESSION['rol'] == 2): ?>
+                <?php if (isset($_SESSION['rol']) && $_SESSION['rol'] == 2 || $_SESSION['rol'] == 3): ?>
                     <a href="index.php?modulo=informe-diario" class="w-full max-w-md">
                         <button class="w-full h-12 rounded-lg bg-green-600 text-lg font-bold text-white transition hover:bg-green-700 shadow-md">
                             Informe Diario
