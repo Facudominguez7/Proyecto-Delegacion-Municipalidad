@@ -45,17 +45,17 @@
         </button>
     </a>
     <?php if (isset($_SESSION['rol']) && $_SESSION['rol'] == 2) { ?>
-    <a href="index.php?modulo=agregar-tarea&idChacra=<?php echo $idChacra ?>">
-        <button class="middle none center mr-4 rounded-lg bg-gray-800 py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-gray-500/20 transition-all hover:shadow-lg hover:shadow-gray-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" data-ripple-light="true">
-            Agregar Tarea
-        </button>
-    </a>
+        <a href="index.php?modulo=agregar-tarea&idChacra=<?php echo $idChacra ?>">
+            <button class="middle none center mr-4 rounded-lg bg-gray-800 py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-gray-500/20 transition-all hover:shadow-lg hover:shadow-gray-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" data-ripple-light="true">
+                Agregar Tarea
+            </button>
+        </a>
     <?php } ?>
 </div>
 <div class="flex flex-col lg:flex-row lg:justify-evenly mt-5">
     <div class="w-full lg:w-1/2">
         <?php
-        $sqlMostrarChacra = "SELECT chacras.nombre, ST_X(ubicacion) AS latitud, ST_Y(ubicacion) AS longitud   
+        $sqlMostrarChacra = "SELECT chacras.nombre, chacras.descripcion, ST_X(ubicacion) AS latitud, ST_Y(ubicacion) AS longitud   
                 FROM chacras
                 WHERE chacras.id = $idChacra";
         $datos = mysqli_query($con, $sqlMostrarChacra);
@@ -65,6 +65,7 @@
                 <input id="latidudInput" class="hidden" type="text" value="<?php echo $fila['latitud'] ?>" readonly>
                 <input id="longitudInput" class="hidden" type="text" value="<?php echo $fila['longitud'] ?>" readonly>
                 <input id="nombreInput" class="hidden" type="text" value="<?php echo $fila['nombre'] ?>" readonly>
+
 
                 <div class="flex justify-center items-center flex-col">
                     <div id="mi_mapa" class="hidden  md:block md:w-96 md:h-96"></div>
@@ -101,6 +102,24 @@
     </div>
 
     <div class="w-full lg:w-4/6">
+        <?php
+        $sqlDescripcion = "SELECT descripcion FROM chacras WHERE id = $idChacra";
+        $resultadoDescripcion = mysqli_query($con, $sqlDescripcion);
+        if ($resultadoDescripcion->num_rows > 0) {
+            $filaDescripcion = mysqli_fetch_array($resultadoDescripcion);
+            if (!is_null($filaDescripcion['descripcion'])) {
+        ?>
+                <div class="sm:flex sm:justify-center">
+                    <div class="mt-5 p-6 w-full sm:w-4/5 bg-white rounded-lg shadow-md text-center">
+                        <h2 class="text-2xl font-bold mb-2">Información:</h2>
+                        <p class="text-base mt-2"><?php echo $filaDescripcion['descripcion']; ?></p>
+                    </div>
+                </div>
+
+        <?php
+            }
+        }
+        ?>
         <table class="border-collapse w-full mt-10">
             <thead>
                 <tr>
@@ -135,12 +154,12 @@
                                 </button>
                             </a>
                             <?php if (isset($_SESSION['rol']) && $_SESSION['rol'] == 2) { ?>
-                            <?php $idChacra = $_GET['idChacra'] ?>
-                            <a href="index.php?modulo=eliminar&idChacra=<?php echo $idChacra; ?>&id=<?php echo $fila['id'] ?>&tipo=tareas" class="text-red-400 hover:text-red-600">
-                                <button class="mb-2 xl:mb-0 middle none center mr-4 rounded-lg bg-red-800 py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-red-500/20 transition-all hover:shadow-lg hover:shadow-red-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" data-ripple-light="true">
-                                    Eliminar
-                                </button>
-                            </a>
+                                <?php $idChacra = $_GET['idChacra'] ?>
+                                <a href="index.php?modulo=eliminar&idChacra=<?php echo $idChacra; ?>&id=<?php echo $fila['id'] ?>&tipo=tareas" class="text-red-400 hover:text-red-600">
+                                    <button class="mb-2 xl:mb-0 middle none center mr-4 rounded-lg bg-red-800 py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-red-500/20 transition-all hover:shadow-lg hover:shadow-red-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" data-ripple-light="true">
+                                        Eliminar
+                                    </button>
+                                </a>
                             <?php } ?>
                         </td>
                         </tr>

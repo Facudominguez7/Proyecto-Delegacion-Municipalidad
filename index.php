@@ -55,7 +55,7 @@ if (!empty($_GET['pdf']) && $_GET['pdf'] === 'ReporteActividadPorDia') {
         <div class="container mx-auto">
             <h1 class="text-xl sm:text-4xl font-bold mb-2">delegación.municipal3233@gmail.com</h1>
             <p class="text-lg sm:text-xl">Av. Gral. Lavalle 4654</p>
-            <p class="text-lg sm:text-xl">Teléfono: 3764668218</p>
+            <p class="text-lg sm:text-xl">Teléfono: 3764 669218</p>
         </div>
     </header>
 

@@ -6,6 +6,7 @@ if (!empty($_GET['accion'])) {
         $telefono = $_POST['telefono'];
         $latitud = $_POST['latitud'];
         $longitud = $_POST['longitud'];
+        $descripcion = $_POST['descripcion'];
 
         // Verificación de la chacra 
         $sql_verificar = "SELECT * FROM chacras WHERE nombre = ?";
@@ -18,9 +19,9 @@ if (!empty($_GET['accion'])) {
             echo "<script> alert('ESTA CHACRA YA EXISTE EN LA BASE DE DATOS');</script>";
         } else {
             // Insertar chacra
-            $sql_insertar = "INSERT INTO chacras (nombre, presidente, numPresidente, ubicacion) VALUES (?, ?, ?, ST_GeomFromText(?))";
+            $sql_insertar = "INSERT INTO chacras (nombre, presidente, numPresidente, ubicacion, descripcion) VALUES (?, ?, ?, ST_GeomFromText(?), ?)";
             $stmt_insertar = mysqli_prepare($con, $sql_insertar);
-            mysqli_stmt_bind_param($stmt_insertar, "ssis", $nombre, $presidente, $telefono, $punto);
+            mysqli_stmt_bind_param($stmt_insertar, "ssiss", $nombre, $presidente, $telefono, $punto, $descripcion);
             $punto = "POINT($latitud $longitud)";
             mysqli_stmt_execute($stmt_insertar);
 
@@ -81,13 +82,19 @@ if (!empty($_GET['accion'])) {
                         <label for="ubicacion" class="flex justify-center mb-3 text-base font-medium text-[#07074D]">
                             Ingrese la ubicación de Google Maps:
                         </label>
-                        <input type="text" id="ubicacionInput" placeholder="Pegue aquí el enlace de Google Maps" class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" required />
+                        <input type="text" id="ubicacionInput" placeholder="Pegue aquí el enlace de Google Maps" class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
                         <button type="button" id="boton-ubicacion" class="bg-[#6A64F1] py-3 px-4 mt-2 text-base font-medium text-white rounded-md outline-none">Procesar</button>
                     </div>
                     <script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
                     <div id="mi_mapa"></div>
                     <input type="text" name="latitud" id="latitud" placeholder="Ej. 40.7128" class="hidden w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" required readonly />
                     <input type="text" name="longitud" id="longitud" placeholder="Ej. -74.0060" class="hidden w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" required readonly />
+                </div>
+                <div class="mb-5">
+                    <label for="descripcion" class="mb-3 block text-base font-medium text-[#07074D]">Descripción:</label>
+                    <textarea id="descripcion" name="descripcion" class="w-full resize-none rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md">
+
+                    </textarea>
                 </div>
                 <div>
                     <button type="submit" class="hover:shadow-form rounded-md bg-[#6A64F1] py-3 px-8 text-base font-semibold text-white outline-none">
