@@ -64,8 +64,14 @@ if (!empty($_GET['pdf']) && $_GET['pdf'] === 'ReporteActividadPorDia') {
         <?php
         if (!empty($_GET['modulo'])) {
             $modulo = $_GET['modulo'];
+            if (!isset($_SESSION['rol'])) {
+                $_SESSION['rol'] = 1;
+            }
             include('./modulos/' . $modulo . '.php');
         } else {
+            if (!isset($_SESSION['rol'])) {
+                $_SESSION['rol'] = 1;
+            }
         ?>
             <div class="flex flex-col items-center space-y-6 mb-5">
                 <img src="imagenes/logo-delegacion.png" alt="Logo Delegación Chacra 3233" class="w-full sm:w-1/3 rounded-xl shadow-lg mb-6">
@@ -101,7 +107,7 @@ if (!empty($_GET['pdf']) && $_GET['pdf'] === 'ReporteActividadPorDia') {
 
     <!-- Footer -->
     <footer class="bg-gray-800 text-white text-center py-4 mt-auto">
-        <p class="text-sm">&copy; 2024 Delegación 32-33. Todos los derechos reservados.</p>
+        <p class="text-sm">&copy; 2025 Delegación 32-33. Todos los derechos reservados.</p>
     </footer>
 </body>
 

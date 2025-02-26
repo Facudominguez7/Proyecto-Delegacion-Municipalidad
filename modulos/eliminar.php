@@ -1,10 +1,22 @@
 <?php
+if (empty($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+}
 // Definir el tipo de registro y el ID
 $tipo = $_GET['tipo'];
 $id = $_GET['id'];
 
 // Verificar si se pasó el tipo y el ID en la URL
 if (isset($_GET['accion'])) {
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $csrf_token = filter_input(INPUT_POST, 'csrf_token', FILTER_SANITIZE_STRING);
+        if (!$csrf_token || $csrf_token !== $_SESSION['csrf_token']) {
+            die("Solicitud inválida por token CSRF.");
+        }
+    }
+    if ($_SERVER["REQUEST_METHOD"] !== "POST") {
+        die("Método no permitido.");
+    }
     switch ($_GET['accion']) {
         case 'eliminar-tareas':
             function eliminarCarpeta($carpeta)
@@ -42,6 +54,7 @@ if (isset($_GET['accion'])) {
 
                 // Verificar si se produjeron errores
                 if (mysqli_error($con)) {
+                    $idChacra = $_GET['idChacra'];
                     echo '<script> 
                     Swal.fire({
                         title: "¡Error al eliminar la tarea!",
@@ -50,7 +63,7 @@ if (isset($_GET['accion'])) {
                         confirmButtonColor: "#d33",
                         confirmButtonText: "Aceptar",
                         willClose: () => {
-                            window.location.href = "index.php?modulo=tareas&idChacra='. $idChacra .'";
+                            window.location.href = "index.php?modulo=tareas&idChacra=' . $idChacra . '";
                         }
                     }); 
                 </script>';
@@ -63,7 +76,7 @@ if (isset($_GET['accion'])) {
                         confirmButtonColor: "#4caf50",
                         confirmButtonText: "Aceptar",
                         willClose: () => {
-                            window.location.href = "index.php?modulo=tareas&idChacra='. $idChacra .'";
+                            window.location.href = "index.php?modulo=tareas&idChacra=' . $idChacra . '";
                         }
                     }); 
                 </script>';
@@ -157,7 +170,6 @@ if (isset($_GET['accion'])) {
                             }
                         }); 
                     </script>';
-
             } else {
                 echo '<script> 
                         Swal.fire({
@@ -171,7 +183,6 @@ if (isset($_GET['accion'])) {
                             }
                         }); 
                     </script>';
-
             }
             mysqli_stmt_close($stmt);
             break;
@@ -226,7 +237,7 @@ if (isset($_GET['accion'])) {
                     confirmButtonColor: "#4caf50",
                     confirmButtonText: "Aceptar",
                     willClose: () => {
-                        window.location.href = "index.php?modulo=tareas-des&idDes='. $idDes .'";
+                        window.location.href = "index.php?modulo=tareas-des&idDes=' . $idDes . '";
                     }
                 }); 
             </script>';
@@ -239,7 +250,7 @@ if (isset($_GET['accion'])) {
                     confirmButtonColor: "#d33",
                     confirmButtonText: "Aceptar",
                     willClose: () => {
-                        window.location.href = "index.php?modulo=tareas-des&idDes='. $idDes .'";
+                        window.location.href = "index.php?modulo=tareas-des&idDes=' . $idDes . '";
                     }
                 }); 
             </script>';
@@ -262,7 +273,7 @@ if (isset($_GET['accion'])) {
                     confirmButtonColor: "#4caf50",
                     confirmButtonText: "Aceptar",
                     willClose: () => {
-                        window.location.href = "index.php?modulo=tareas-puntos&idPunto='. $idPunto .'";
+                        window.location.href = "index.php?modulo=tareas-puntos&idPunto=' . $idPunto . '";
                     }
                 }); 
             </script>';
@@ -275,7 +286,7 @@ if (isset($_GET['accion'])) {
                     confirmButtonColor: "#d33",
                     confirmButtonText: "Aceptar",
                     willClose: () => {
-                        window.location.href = "index.php?modulo=tareas-puntos&idPunto='. $idPunto .'";
+                        window.location.href = "index.php?modulo=tareas-puntos&idPunto=' . $idPunto . '";
                     }
                 }); 
             </script>';
@@ -310,6 +321,7 @@ if (isset($_GET['accion'])) {
                             } else {
                                 ?>
                                     <form action="index.php?modulo=eliminar&tipo=<?php echo $tipo; ?>&accion=eliminar-<?php echo $tipo; ?>&id=<?php echo $id; ?>" method="POST">
+                                        <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
                                     <?php
                                 }
                                     ?>

@@ -85,6 +85,6 @@ if (isset($_GET['salir'])) {
         <div class="text-center">
             <p class="text-sm">¿No tiene una cuenta? <a href="index.php?modulo=registro" class="text-cyan-600">Registrarse</a></p>
         </div>
-        <p class="text-xs text-gray-600 text-center mt-8">&copy; 2024 Delegación 32-33</p>
+        <p class="text-xs text-gray-600 text-center mt-8">&copy; 2025 Delegación 32-33</p>
     </div>
 </div>

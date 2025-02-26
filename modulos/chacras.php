@@ -43,7 +43,7 @@
             Volver
         </button>
     </a>
-    <?php if (isset($_SESSION['rol']) && $_SESSION['rol'] == 2 || $_SESSION['rol'] == 3) {?>
+    <?php if (isset($_SESSION['rol']) && $_SESSION['rol'] == 2 || $_SESSION['rol'] == 3) { ?>
         <a href="index.php?modulo=agregar-chacra" class="mb-4 lg:mb-0 lg:mr-4">
             <button class="rounded-lg bg-gray-800 py-3 px-6 font-sans text-xs lg:text-sm font-bold uppercase text-white shadow-md shadow-gray-500/20 transition-all hover:shadow-lg hover:shadow-gray-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" data-ripple-light="true">
                 Agregar Chacra
@@ -98,6 +98,7 @@
                                             Editar
                                         </button>
                                     </a>
+
                                     <?php if ($_SESSION['rol'] == 2) { ?>
                                         <a href="index.php?modulo=eliminar&id=<?php echo $filabus['id'] ?>&tipo=chacras" class="text-red-400 hover:text-red-600 mt-2 lg:mt-0">
                                             <button class="middle none center mr-4 rounded-lg bg-red-800 py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-red-500/20 transition-all hover:shadow-lg hover:shadow-red-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" data-ripple-light="true">
